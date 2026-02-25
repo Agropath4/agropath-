@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rewards | AgroPath</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Rewards Zone | AgroPath</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -12,18 +12,25 @@
         .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 12px; transition: 0.2s; color: #64748b; font-weight: 500; text-decoration: none; }
         .nav-item:hover { background: #f1f5f9; color: #0f172a; }
         .nav-item.active { background: #f0fdf4; color: #15803d; font-weight: 600; box-shadow: inset 0 0 0 1px rgba(22, 163, 74, 0.1); }
+        .custom-scrollbar::-webkit-scrollbar { display: none; }
         @keyframes grow { 0% { transform: scale(0.8); opacity: 0.5; } 100% { transform: scale(1); opacity: 1; } }
         .animate-grow { animation: grow 1s ease-out; }
     </style>
 </head>
 <body class="text-slate-900 h-screen flex overflow-hidden">
 
-    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col hidden md:flex">
-        <div class="p-6 border-b border-slate-100 flex items-center gap-3">
-            <div class="bg-green-600 p-2 rounded-xl"><i data-lucide="leaf" class="w-5 h-5 text-white"></i></div>
-            <div><h1 class="text-lg font-bold tracking-tight">AGROPATH</h1></div>
+    <div id="mobile-overlay" onclick="toggleMobileMenu()" class="fixed inset-0 bg-slate-900/60 z-40 hidden backdrop-blur-sm md:hidden transition-opacity"></div>
+
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-200 flex flex-col transform -translate-x-full transition-transform duration-300 ease-in-out md:relative md:translate-x-0 shadow-2xl md:shadow-none">
+        <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-green-600 p-2 rounded-xl"><i data-lucide="leaf" class="w-5 h-5 text-white"></i></div>
+                <div><h1 class="text-lg font-bold tracking-tight">AGROPATH</h1><p class="text-[10px] text-slate-500 font-bold uppercase tracking-wide">Smart Farming</p></div>
+            </div>
+            <button onclick="toggleMobileMenu()" class="md:hidden p-1 text-slate-400 hover:text-slate-600"><i data-lucide="x" size="20"></i></button>
         </div>
-        <nav class="p-4 space-y-1.5 flex-1 overflow-y-auto">
+
+        <nav class="p-4 space-y-1.5 flex-1 overflow-y-auto custom-scrollbar">
             <a href="dashboard.html" class="nav-item"><i data-lucide="layout-dashboard" size="18"></i> Dashboard</a>
             <a href="profile.html" class="nav-item"><i data-lucide="user" size="18"></i> Profile Settings</a>
             <a href="rewards.html" class="nav-item active"><i data-lucide="award" size="18"></i> Rewards Zone</a>
@@ -35,67 +42,128 @@
             <a href="weather.html" class="nav-item"><i data-lucide="cloud-rain" size="18"></i> Weather</a>
             <a href="smartpick.html" class="nav-item"><i data-lucide="trending-up" size="18"></i> Smart Pick</a>
         </nav>
+
+        <div class="p-4 border-t border-slate-100">
+            <div class="bg-slate-50 rounded-xl p-3 flex items-center gap-3 border border-slate-100 cursor-pointer hover:bg-slate-100" onclick="window.location.href='profile.html'">
+                <img id="sidebar-avatar" src="https://ui-avatars.com/api/?name=Farmer&background=16a34a&color=fff" class="w-9 h-9 rounded-full object-cover">
+                <div class="flex-1 overflow-hidden">
+                    <p id="sidebar-name" class="text-sm font-bold text-slate-900 truncate">Loading...</p>
+                    <p class="text-[10px] text-slate-500 font-medium">View Profile</p>
+                </div>
+            </div>
+        </div>
     </aside>
 
-    <div class="flex-1 flex flex-col h-full relative w-full">
-        <header class="bg-white/80 backdrop-blur-md sticky top-0 z-30 border-b border-slate-200 px-8 py-4 flex items-center justify-between">
-            <h2 class="text-xl font-bold text-slate-800">Rewards Zone</h2>
-            <button onclick="logoutUser()" class="flex items-center gap-2 px-3 py-1.5 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 font-bold"><i data-lucide="log-out" size="16"></i> Logout</button>
+    <div class="flex-1 flex flex-col h-full relative w-full overflow-hidden">
+        <header class="bg-white/80 backdrop-blur-md sticky top-0 z-30 border-b border-slate-200 px-4 md:px-8 py-4 flex items-center justify-between shadow-sm">
+            <div class="flex items-center gap-3">
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 -ml-2 text-slate-600 hover:bg-slate-100 rounded-xl"><i data-lucide="menu" size="24"></i></button>
+                <h2 class="text-lg md:text-xl font-bold text-slate-800">Rewards Zone</h2>
+            </div>
+            <div class="flex items-center gap-3 md:gap-4">
+                <button onclick="logoutUser()" class="hidden md:flex items-center gap-2 px-3 py-1.5 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition-colors border border-red-100 text-sm font-bold"><i data-lucide="log-out" size="16"></i> Logout</button>
+                <button onclick="logoutUser()" class="md:hidden p-2 text-red-500 hover:bg-red-50 rounded-full"><i data-lucide="log-out" size="20"></i></button>
+            </div>
         </header>
 
-        <main class="flex-1 overflow-y-auto p-8">
-            <div class="bg-gradient-to-br from-emerald-600 to-teal-800 rounded-3xl p-8 text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center gap-8 mb-8">
-                <div class="flex flex-col items-center z-10">
-                    <div class="w-32 h-32 bg-white/20 rounded-full flex items-center justify-center mb-4 backdrop-blur-sm border-4 border-white/30 shadow-inner">
+        <main class="flex-1 overflow-y-auto p-4 md:p-8">
+            <div class="bg-gradient-to-br from-emerald-600 to-teal-800 rounded-3xl p-6 md:p-8 text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center gap-8 mb-8">
+                <div class="flex flex-col items-center z-10 w-full md:w-1/3">
+                    <div class="w-24 h-24 md:w-32 md:h-32 bg-white/20 rounded-full flex items-center justify-center mb-4 backdrop-blur-sm border-4 border-white/30 shadow-inner">
                         <i data-lucide="sprout" size="48" class="text-white animate-grow"></i>
                     </div>
                     <h3 class="text-xl font-bold">Your Farm Tree</h3>
+                    <p class="text-emerald-100 text-sm">Level 1 Sapling</p>
                 </div>
                 <div class="flex-1 w-full z-10">
                     <div class="flex justify-between items-end mb-2">
-                        <h2 class="text-2xl font-bold">Level 1</h2>
-                        <span class="text-3xl font-bold">120<span class="text-lg text-emerald-200">/200 Pts</span></span>
+                        <div>
+                            <h2 class="text-2xl font-bold">Level 1</h2>
+                            <p class="text-emerald-100 text-sm hidden md:block">Earn 200 points to grow your tree!</p>
+                        </div>
+                        <span class="text-2xl md:text-3xl font-bold">120<span class="text-base md:text-lg text-emerald-200">/200</span></span>
                     </div>
                     <div class="w-full bg-black/20 rounded-full h-4 mb-4"><div class="bg-yellow-400 h-4 rounded-full w-[60%] shadow-[0_0_10px_rgba(250,204,21,0.5)]"></div></div>
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                <h3 class="font-bold text-slate-800 mb-4 text-lg">Local Leaderboard</h3>
-                <div class="space-y-4">
-                    <div class="flex items-center justify-between p-3 bg-yellow-50 border border-yellow-100 rounded-xl">
-                        <div class="flex items-center gap-3"><span class="font-bold text-yellow-700 w-4">4</span><div class="w-8 h-8 bg-green-600 rounded-full text-white flex items-center justify-center text-xs font-bold" id="lb-initials">AF</div><p class="text-sm font-bold text-slate-900">You</p></div>
-                        <span class="text-sm font-bold text-slate-700">120 Pts</span>
+            <div class="grid lg:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2"><span class="bg-orange-100 p-1.5 rounded-lg"><i data-lucide="zap" class="text-orange-600 w-4 h-4"></i></span> Earn Points</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <div class="flex items-center gap-3">
+                                <div class="bg-green-100 p-2 rounded-lg text-green-600"><i data-lucide="scan" size="18"></i></div>
+                                <div><p class="text-sm font-bold text-slate-800">Scan Crop Health</p></div>
+                            </div>
+                            <button onclick="window.location.href='scan.html'" class="px-3 py-1.5 bg-slate-900 text-white text-xs font-bold rounded-lg">+50 Pts</button>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <div class="flex items-center gap-3">
+                                <div class="bg-blue-100 p-2 rounded-lg text-blue-600"><i data-lucide="cloud-rain" size="18"></i></div>
+                                <div><p class="text-sm font-bold text-slate-800">Check Weather</p></div>
+                            </div>
+                            <button onclick="window.location.href='weather.html'" class="px-3 py-1.5 bg-slate-900 text-white text-xs font-bold rounded-lg">+10 Pts</button>
+                        </div>
                     </div>
-                    <div class="flex items-center justify-between p-2"><div class="flex items-center gap-3"><span class="font-bold text-slate-400 w-4">1</span><div class="w-8 h-8 bg-slate-200 rounded-full text-slate-600 flex items-center justify-center text-xs font-bold">AK</div><p class="text-sm font-medium text-slate-600">Arun Kumar</p></div><span class="text-sm font-bold text-slate-500">850 Pts</span></div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <h3 class="font-bold text-slate-800 mb-4 text-lg">Local Leaderboard</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-3 bg-yellow-50 border border-yellow-100 rounded-xl">
+                            <div class="flex items-center gap-3"><span class="font-bold text-yellow-700 w-4">4</span><div class="w-8 h-8 bg-green-600 rounded-full text-white flex items-center justify-center text-xs font-bold" id="lb-initials">ME</div><p class="text-sm font-bold text-slate-900">You</p></div>
+                            <span class="text-sm font-bold text-slate-700">120 Pts</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2"><div class="flex items-center gap-3"><span class="font-bold text-slate-400 w-4">1</span><div class="w-8 h-8 bg-slate-200 rounded-full text-slate-600 flex items-center justify-center text-xs font-bold">AK</div><p class="text-sm font-medium text-slate-600">Arun Kumar</p></div><span class="text-sm font-bold text-slate-500">850 Pts</span></div>
+                    </div>
                 </div>
             </div>
         </main>
     </div>
 
+    <script>
+        window.toggleMobileMenu = function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobile-overlay');
+            if (sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        };
+        lucide.createIcons();
+    </script>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-      const firebaseConfig = {
-  apiKey: "AIzaSyDyZ5c3whwanxBvmrPtPIGpjw5t2s2LHXc",
-  authDomain: "agropath-6d8ea.firebaseapp.com",
-  projectId: "agropath-6d8ea",
-  storageBucket: "agropath-6d8ea.firebasestorage.app",
-  messagingSenderId: "234293564294",
-  appId: "1:234293564294:web:ac33138d93ca565d9dd207",
-  measurementId: "G-TRKFSVR8WD"
-};
-        const app = initializeApp(firebaseConfig); const auth = getAuth(app);
         
+        const firebaseConfig = {
+            apiKey: "AIzaSyDyZ5c3whwanxBvmrPtPIGpjw5t2s2LHXc",
+            authDomain: "agropath-6d8ea.firebaseapp.com",
+            projectId: "agropath-6d8ea",
+            storageBucket: "agropath-6d8ea.firebasestorage.app",
+            messagingSenderId: "234293564294",
+            appId: "1:234293564294:web:ac33138d93ca565d9dd207",
+            measurementId: "G-TRKFSVR8WD"
+        };
+        const app = initializeApp(firebaseConfig); const auth = getAuth(app);
+
         onAuthStateChanged(auth, (user) => {
             if (!user) window.location.href = "index.html"; 
-            else if(user.displayName) {
-                let parts = user.displayName.split(' ');
-                document.getElementById('lb-initials').innerText = parts[0][0] + (parts.length > 1 ? parts[parts.length-1][0] : '');
+            else {
+                document.getElementById('sidebar-name').innerText = user.displayName || "Farmer";
+                if(user.photoURL) document.getElementById('sidebar-avatar').src = user.photoURL;
+                if(user.displayName) {
+                    const parts = user.displayName.split(' ');
+                    document.getElementById('lb-initials').innerText = parts[0][0] + (parts.length > 1 ? parts[parts.length-1][0] : '');
+                }
             }
         });
         window.logoutUser = () => signOut(auth);
-        lucide.createIcons();
     </script>
 </body>
 </html>
