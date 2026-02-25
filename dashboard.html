@@ -1,23 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>AgroPath – Smart Agriculture Technology Platform</title>
-
-<meta name="description" content="AgroPath is a smart agriculture platform helping farmers with technology, youth engagement, crop data, and modern farming solutions.">
-
-<meta name="keywords" content="AgroPath, agriculture website, smart farming, agri technology, youth in farming, digital agriculture">
-
-<meta name="author" content="AgroPath Team">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AGROPATH - Future of Farming</title>
-    <!-- Tailwind CSS -->
+    <meta name="description" content="AgroPath is a smart agriculture platform helping farmers with technology, youth engagement, crop data, and modern farming solutions.">
+    <meta name="keywords" content="AgroPath, agriculture website, smart farming, agri technology, youth in farming, digital agriculture">
+    <meta name="author" content="AgroPath Team">
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -65,7 +56,6 @@
 </head>
 <body class="bg-slate-50 text-slate-900 h-screen flex overflow-hidden selection:bg-green-100 selection:text-green-800">
 
-    <!-- REWARD TOAST (Hidden by default) -->
     <div id="reward-toast" class="fixed top-20 right-4 md:top-6 md:right-6 z-[70] bg-white border-2 border-yellow-400 text-slate-800 px-4 py-3 md:px-6 md:py-4 rounded-2xl shadow-2xl flex items-center gap-4 translate-x-[150%] transition-transform duration-500 max-w-[90vw]">
         <div class="bg-yellow-100 p-2 rounded-full text-yellow-600 shrink-0">
             <i data-lucide="star" size="24" class="fill-yellow-400"></i>
@@ -76,10 +66,8 @@
         </div>
     </div>
 
-    <!-- ONBOARDING OVERLAY -->
     <div id="onboarding-overlay" class="fixed inset-0 z-[60] bg-slate-900/95 flex items-center justify-center p-4 transition-opacity duration-500 backdrop-blur-sm">
         <div class="max-w-5xl w-full bg-white rounded-[2rem] p-6 md:p-12 shadow-2xl relative overflow-hidden max-h-[90vh] overflow-y-auto custom-scrollbar">
-            <!-- Decorative BG -->
             <div class="absolute top-0 right-0 w-64 h-64 bg-green-50 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
             <div class="absolute bottom-0 left-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl -ml-16 -mb-16 pointer-events-none"></div>
 
@@ -92,8 +80,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 relative z-10">
-                <!-- Beginner Card -->
-                <button onclick="selectExperience('beginner')" class="group p-6 md:p-8 rounded-2xl border-2 border-slate-100 hover:border-green-500 hover:bg-green-50/50 transition-all text-left hover:shadow-xl hover:shadow-green-500/10 relative overflow-hidden flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0">
+                <button onclick="window.selectExperience('beginner')" class="group p-6 md:p-8 rounded-2xl border-2 border-slate-100 hover:border-green-500 hover:bg-green-50/50 transition-all text-left hover:shadow-xl hover:shadow-green-500/10 relative overflow-hidden flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0">
                     <div class="w-12 h-12 md:w-16 md:h-16 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center md:mb-6 text-2xl md:text-3xl shadow-sm group-hover:scale-110 transition-transform shrink-0">🌱</div>
                     <div>
                         <h3 class="text-lg md:text-2xl font-bold text-slate-900 mb-1 md:mb-2">Beginner</h3>
@@ -104,8 +91,7 @@
                     </div>
                 </button>
 
-                <!-- Intermediate Card -->
-                <button onclick="selectExperience('intermediate')" class="group p-6 md:p-8 rounded-2xl border-2 border-slate-100 hover:border-blue-500 hover:bg-blue-50/50 transition-all text-left hover:shadow-xl hover:shadow-blue-500/10 relative overflow-hidden flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0">
+                <button onclick="window.selectExperience('intermediate')" class="group p-6 md:p-8 rounded-2xl border-2 border-slate-100 hover:border-blue-500 hover:bg-blue-50/50 transition-all text-left hover:shadow-xl hover:shadow-blue-500/10 relative overflow-hidden flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0">
                     <div class="w-12 h-12 md:w-16 md:h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center md:mb-6 text-2xl md:text-3xl shadow-sm group-hover:scale-110 transition-transform shrink-0">🌿</div>
                     <div>
                         <h3 class="text-lg md:text-2xl font-bold text-slate-900 mb-1 md:mb-2">Intermediate</h3>
@@ -116,8 +102,7 @@
                     </div>
                 </button>
 
-                <!-- Expert Card -->
-                <button onclick="selectExperience('expert')" class="group p-6 md:p-8 rounded-2xl border-2 border-slate-100 hover:border-purple-500 hover:bg-purple-50/50 transition-all text-left hover:shadow-xl hover:shadow-purple-500/10 relative overflow-hidden flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0">
+                <button onclick="window.selectExperience('expert')" class="group p-6 md:p-8 rounded-2xl border-2 border-slate-100 hover:border-purple-500 hover:bg-purple-50/50 transition-all text-left hover:shadow-xl hover:shadow-purple-500/10 relative overflow-hidden flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0">
                     <div class="w-12 h-12 md:w-16 md:h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center md:mb-6 text-2xl md:text-3xl shadow-sm group-hover:scale-110 transition-transform shrink-0">🚜</div>
                     <div>
                         <h3 class="text-lg md:text-2xl font-bold text-slate-900 mb-1 md:mb-2">Expert</h3>
@@ -131,10 +116,8 @@
         </div>
     </div>
 
-    <!-- Mobile Overlay -->
-    <div id="mobile-overlay" onclick="toggleMobileMenu()" class="fixed inset-0 bg-slate-900/60 z-40 hidden backdrop-blur-sm lg:hidden transition-opacity"></div>
+    <div id="mobile-overlay" onclick="window.toggleMobileMenu()" class="fixed inset-0 bg-slate-900/60 z-40 hidden backdrop-blur-sm lg:hidden transition-opacity"></div>
 
-    <!-- Sidebar -->
     <aside id="sidebar" class="fixed top-0 left-0 z-50 h-full w-64 bg-white border-r border-slate-200 transition-transform duration-300 ease-in-out -translate-x-full lg:translate-x-0 lg:static flex-shrink-0 flex flex-col shadow-2xl lg:shadow-none">
         <div class="p-6 flex items-center justify-between border-b border-slate-100">
             <div class="flex items-center gap-3">
@@ -146,44 +129,43 @@
                     <p class="text-[10px] text-slate-500 font-bold uppercase tracking-wide">Smart Farming</p>
                 </div>
             </div>
-            <!-- Mobile Close Button -->
-            <button onclick="toggleMobileMenu()" class="lg:hidden p-1 text-slate-400 hover:text-slate-600 transition-colors">
+            <button onclick="window.toggleMobileMenu()" class="lg:hidden p-1 text-slate-400 hover:text-slate-600 transition-colors">
                 <i data-lucide="x" size="20"></i>
             </button>
         </div>
 
         <nav class="p-4 space-y-1.5 flex-1 overflow-y-auto custom-scrollbar">
-            <button onclick="switchTab('dashboard')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-semibold bg-green-50 text-green-700 ring-1 ring-green-600/10" data-tab="dashboard">
+            <button onclick="window.switchTab('dashboard')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-semibold bg-green-50 text-green-700 ring-1 ring-green-600/10" data-tab="dashboard">
                 <i data-lucide="layout-dashboard" size="18"></i> <span class="text-sm">Dashboard</span>
             </button>
-            <button onclick="switchTab('rewards')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="rewards">
+            <button onclick="window.switchTab('rewards')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="rewards">
                 <i data-lucide="award" size="18"></i> <span class="text-sm">Rewards Zone</span>
             </button>
-            <button onclick="switchTab('shop')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="shop">
+            <button onclick="window.switchTab('shop')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="shop">
                 <i data-lucide="shopping-bag" size="18"></i> <span class="text-sm">AgroShop</span> <span class="ml-auto text-[10px] bg-red-100 text-red-600 px-2 py-0.5 rounded-full font-bold">New</span>
             </button>
-            <button onclick="switchTab('ai-chat')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="ai-chat">
+            <button onclick="window.switchTab('ai-chat')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="ai-chat">
                 <i data-lucide="message-square" size="18"></i> <span class="text-sm">AgroGenius AI</span>
             </button>
-            <button onclick="switchTab('scan')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="scan">
+            <button onclick="window.switchTab('scan')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="scan">
                 <i data-lucide="scan" size="18"></i> <span class="text-sm">Disease Scan</span>
             </button>
-            <button onclick="switchTab('crop-guide')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="crop-guide">
+            <button onclick="window.switchTab('crop-guide')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="crop-guide">
                 <i data-lucide="sprout" size="18"></i> <span class="text-sm">Crop Guide</span>
             </button>
-            <button onclick="switchTab('soil')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="soil">
+            <button onclick="window.switchTab('soil')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="soil">
                 <i data-lucide="beaker" size="18"></i> <span class="text-sm">Soil Lab</span>
             </button>
-            <button onclick="switchTab('weather')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="weather">
+            <button onclick="window.switchTab('weather')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="weather">
                 <i data-lucide="cloud-rain" size="18"></i> <span class="text-sm">Weather</span>
             </button>
-            <button onclick="switchTab('recommend')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="recommend">
+            <button onclick="window.switchTab('recommend')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="recommend">
                 <i data-lucide="trending-up" size="18"></i> <span class="text-sm">Smart Pick</span>
             </button>
         </nav>
 
         <div class="p-4 border-t border-slate-100">
-            <div class="bg-yellow-50 rounded-xl p-3 mb-3 border border-yellow-100 flex justify-between items-center cursor-pointer hover:bg-yellow-100 transition-colors group" onclick="switchTab('rewards')">
+            <div class="bg-yellow-50 rounded-xl p-3 mb-3 border border-yellow-100 flex justify-between items-center cursor-pointer hover:bg-yellow-100 transition-colors group" onclick="window.switchTab('rewards')">
                 <div class="flex items-center gap-2">
                     <i data-lucide="star" class="text-yellow-500 fill-yellow-500 group-hover:scale-110 transition-transform" size="16"></i>
                     <span class="text-xs font-bold text-yellow-700">AgroPoints</span>
@@ -191,28 +173,26 @@
                 <span id="user-points" class="text-sm font-bold text-yellow-800">120</span>
             </div>
             <div class="bg-slate-50 rounded-xl p-3 flex items-center gap-3 border border-slate-100">
-                <div class="w-9 h-9 rounded-full bg-green-600 flex items-center justify-center text-white font-bold text-xs shadow-sm">JD</div>
-                <div>
-                    <p class="text-sm font-bold text-slate-900">John Doe</p>
+                <div id="sidebar-initials" class="w-9 h-9 rounded-full bg-green-600 flex items-center justify-center text-white font-bold text-xs shadow-sm">AF</div>
+                <div class="flex-1 overflow-hidden">
+                    <p id="sidebar-name" class="text-sm font-bold text-slate-900 truncate">Loading...</p>
                     <p class="text-[10px] text-slate-500 font-medium">Level <span id="sidebar-level">1</span></p>
                 </div>
             </div>
         </div>
     </aside>
 
-    <!-- Main Content -->
     <div class="flex-1 flex flex-col h-full relative w-full bg-slate-50">
-        <!-- Header -->
         <header class="bg-white/80 backdrop-blur-md sticky top-0 z-30 border-b border-slate-200 px-4 md:px-8 py-3 md:py-4 flex items-center justify-between shadow-sm">
             <div class="flex items-center gap-3">
-                <button onclick="toggleMobileMenu()" class="lg:hidden p-2 -ml-2 hover:bg-slate-100 rounded-xl text-slate-600 transition-colors">
+                <button onclick="window.toggleMobileMenu()" class="lg:hidden p-2 -ml-2 hover:bg-slate-100 rounded-xl text-slate-600 transition-colors">
                     <i data-lucide="menu" size="24"></i>
                 </button>
                 <h2 id="header-title" class="text-lg md:text-xl font-bold text-slate-800">Dashboard</h2>
             </div>
             
             <div class="flex items-center gap-3">
-                <div onclick="initRealTime()" class="hidden md:flex flex-col items-end cursor-pointer group">
+                <div onclick="window.initRealTime()" class="hidden md:flex flex-col items-end cursor-pointer group">
                     <div class="flex items-center gap-1.5 text-sm font-bold text-slate-700 group-hover:text-green-600 transition-colors">
                         <i data-lucide="map-pin" size="14" class="text-green-600"></i>
                         <span id="header-location-text">Locating...</span>
@@ -220,19 +200,23 @@
                     <span class="text-[10px] text-slate-400 font-medium">Tap to refresh</span>
                 </div>
                 <div class="h-8 w-px bg-slate-200 mx-2 hidden md:block"></div>
-                <button onclick="switchTab('rewards')" class="relative p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-all hover:text-slate-900">
+                <button onclick="window.switchTab('rewards')" class="relative p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-all hover:text-slate-900">
                     <i data-lucide="bell" size="22"></i>
                     <span class="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full ring-2 ring-white"></span>
+                </button>
+                
+                <button onclick="window.logoutUser()" class="hidden md:flex items-center gap-2 ml-2 px-3 py-1.5 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition-colors border border-red-100 text-sm font-bold">
+                    <i data-lucide="log-out" size="16"></i> Logout
+                </button>
+                <button onclick="window.logoutUser()" class="md:hidden p-2 text-red-500 hover:bg-red-50 rounded-full transition-all ml-1">
+                    <i data-lucide="log-out" size="22"></i>
                 </button>
             </div>
         </header>
 
-        <!-- Main Scrollable Area -->
         <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 custom-scrollbar relative">
             
-            <!-- VIEW: DASHBOARD -->
             <div id="view-dashboard" class="view-section space-y-6 fade-in">
-                <!-- Welcome Banner -->
                 <div class="relative overflow-hidden bg-slate-900 rounded-3xl p-6 md:p-8 text-white shadow-xl shadow-slate-900/10">
                     <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                         <div>
@@ -241,24 +225,21 @@
                                 You have <strong><span id="banner-points">120</span> AgroPoints</strong>. Use them to get discounts on fertilizers and tools in the AgroShop.
                             </p>
                             <div class="flex flex-wrap gap-3 mt-6">
-                                <button onclick="switchTab('shop')" class="flex items-center gap-2 px-5 py-2.5 bg-yellow-500 text-slate-900 font-bold rounded-full hover:bg-yellow-400 transition-all shadow-lg shadow-yellow-500/20 text-sm w-full md:w-auto justify-center">
+                                <button onclick="window.switchTab('shop')" class="flex items-center gap-2 px-5 py-2.5 bg-yellow-500 text-slate-900 font-bold rounded-full hover:bg-yellow-400 transition-all shadow-lg shadow-yellow-500/20 text-sm w-full md:w-auto justify-center">
                                     <i data-lucide="shopping-bag" size="16"></i> Visit Shop
                                 </button>
-                                <button onclick="initRealTime()" class="flex items-center gap-2 px-5 py-2.5 bg-slate-800 text-white font-semibold rounded-full hover:bg-slate-700 transition-all border border-slate-700 text-sm w-full md:w-auto justify-center">
+                                <button onclick="window.initRealTime()" class="flex items-center gap-2 px-5 py-2.5 bg-slate-800 text-white font-semibold rounded-full hover:bg-slate-700 transition-all border border-slate-700 text-sm w-full md:w-auto justify-center">
                                     <i data-lucide="refresh-cw" size="16"></i> Refresh Data
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <!-- Decorative Background -->
                     <div class="absolute right-0 bottom-0 opacity-10 pointer-events-none">
                         <i data-lucide="sprout" class="w-48 h-48 md:w-64 md:h-64 -mb-12 -mr-12 transform rotate-12"></i>
                     </div>
                 </div>
 
-                <!-- Weather & Status Grid -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <!-- Real-time Status Card -->
                     <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                         <div class="flex items-center justify-between mb-6">
                             <h3 class="font-bold text-slate-800 flex items-center gap-2">
@@ -301,7 +282,6 @@
                         </div>
                     </div>
 
-                    <!-- Alerts Feed -->
                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col h-full">
                         <h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
                              <span class="bg-amber-100 p-1.5 rounded-lg"><i data-lucide="bell" class="text-amber-600 w-4 h-4"></i></span>
@@ -316,32 +296,31 @@
                     </div>
                 </div>
 
-                <!-- Simple Quick Actions -->
                 <div>
                     <h3 class="font-bold text-slate-800 text-lg mb-4">Quick Tools</h3>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <button onclick="switchTab('scan')" class="group p-5 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:border-purple-200 transition-all text-left">
+                        <button onclick="window.switchTab('scan')" class="group p-5 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:border-purple-200 transition-all text-left">
                             <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                                 <i data-lucide="scan" size="24"></i>
                             </div>
                             <span class="font-bold text-slate-700 block">Scan Disease</span>
                             <span class="text-xs text-slate-400">Earn +50 Pts</span>
                         </button>
-                        <button onclick="switchTab('crop-guide')" class="group p-5 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:border-emerald-200 transition-all text-left">
+                        <button onclick="window.switchTab('crop-guide')" class="group p-5 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:border-emerald-200 transition-all text-left">
                             <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                                 <i data-lucide="book-open" size="24"></i>
                             </div>
                             <span class="font-bold text-slate-700 block">Crop Guide</span>
                             <span class="text-xs text-slate-400">Step-by-step</span>
                         </button>
-                        <button onclick="switchTab('shop')" class="group p-5 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:border-yellow-200 transition-all text-left">
+                        <button onclick="window.switchTab('shop')" class="group p-5 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:border-yellow-200 transition-all text-left">
                             <div class="w-12 h-12 rounded-xl bg-yellow-100 text-yellow-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                                 <i data-lucide="shopping-bag" size="24"></i>
                             </div>
                             <span class="font-bold text-slate-700 block">AgroShop</span>
                             <span class="text-xs text-slate-400">Use Points</span>
                         </button>
-                        <button onclick="switchTab('rewards')" class="group p-5 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:border-orange-200 transition-all text-left">
+                        <button onclick="window.switchTab('rewards')" class="group p-5 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:border-orange-200 transition-all text-left">
                             <div class="w-12 h-12 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                                 <i data-lucide="award" size="24"></i>
                             </div>
@@ -352,14 +331,10 @@
                 </div>
             </div>
 
-            <!-- VIEW: REWARDS ZONE (New) -->
             <div id="view-rewards" class="view-section hidden space-y-6 fade-in">
-                <!-- Tree & Level Card -->
                 <div class="bg-gradient-to-br from-emerald-600 to-teal-800 rounded-3xl p-6 md:p-8 text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
-                    <!-- Decorative patterns -->
                     <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-12 -mt-12 pointer-events-none"></div>
                     
-                    <!-- Tree Section -->
                     <div class="flex flex-col items-center z-10 w-full md:w-1/3">
                         <div id="tree-container" class="w-24 h-24 md:w-32 md:h-32 bg-white/20 rounded-full flex items-center justify-center mb-4 backdrop-blur-sm border-4 border-white/30 shadow-inner">
                             <i id="tree-icon" data-lucide="sprout" size="48" class="text-white animate-grow md:w-16 md:h-16"></i>
@@ -368,7 +343,6 @@
                         <p class="text-emerald-100 text-sm">Level <span id="tree-level-display">1</span> Sapling</p>
                     </div>
 
-                    <!-- Progress Section -->
                     <div class="flex-1 w-full z-10">
                         <div class="flex justify-between items-end mb-2">
                             <div>
@@ -385,7 +359,6 @@
                 </div>
 
                 <div class="grid lg:grid-cols-2 gap-6">
-                    <!-- Activities -->
                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col">
                         <h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
                             <span class="bg-orange-100 p-1.5 rounded-lg"><i data-lucide="zap" class="text-orange-600 w-4 h-4"></i></span>
@@ -400,7 +373,7 @@
                                         <p class="text-xs text-slate-500">Identify diseases</p>
                                     </div>
                                 </div>
-                                <button onclick="switchTab('scan')" class="px-3 py-1.5 bg-slate-900 text-white text-xs font-bold rounded-lg hover:bg-slate-700 transition-colors">+50 Pts</button>
+                                <button onclick="window.switchTab('scan')" class="px-3 py-1.5 bg-slate-900 text-white text-xs font-bold rounded-lg hover:bg-slate-700 transition-colors">+50 Pts</button>
                             </div>
                             <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
                                 <div class="flex items-center gap-3">
@@ -410,7 +383,7 @@
                                         <p class="text-xs text-slate-500">Daily forecast check</p>
                                     </div>
                                 </div>
-                                <button onclick="initRealTime(); showRewardToast(); userPoints+=10; updatePointsUI();" class="px-3 py-1.5 bg-slate-900 text-white text-xs font-bold rounded-lg hover:bg-slate-700 transition-colors">+10 Pts</button>
+                                <button onclick="window.initRealTime(); window.showRewardToast(); window.userPoints+=10; window.updatePointsUI();" class="px-3 py-1.5 bg-slate-900 text-white text-xs font-bold rounded-lg hover:bg-slate-700 transition-colors">+10 Pts</button>
                             </div>
                             <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
                                 <div class="flex items-center gap-3">
@@ -420,29 +393,26 @@
                                         <p class="text-xs text-slate-500">Learn cultivation</p>
                                     </div>
                                 </div>
-                                <button onclick="switchTab('crop-guide')" class="px-3 py-1.5 bg-slate-900 text-white text-xs font-bold rounded-lg hover:bg-slate-700 transition-colors">+20 Pts</button>
+                                <button onclick="window.switchTab('crop-guide')" class="px-3 py-1.5 bg-slate-900 text-white text-xs font-bold rounded-lg hover:bg-slate-700 transition-colors">+20 Pts</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Leaderboard & History -->
                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col h-full">
                         <div class="flex gap-4 border-b border-slate-100 pb-2 mb-4">
-                            <button onclick="toggleRewardTab('leaderboard')" id="tab-btn-leaderboard" class="text-sm font-bold text-slate-900 border-b-2 border-slate-900 pb-2">Leaderboard</button>
-                            <button onclick="toggleRewardTab('history')" id="tab-btn-history" class="text-sm font-bold text-slate-400 hover:text-slate-600 pb-2">History</button>
+                            <button onclick="window.toggleRewardTab('leaderboard')" id="tab-btn-leaderboard" class="text-sm font-bold text-slate-900 border-b-2 border-slate-900 pb-2">Leaderboard</button>
+                            <button onclick="window.toggleRewardTab('history')" id="tab-btn-history" class="text-sm font-bold text-slate-400 hover:text-slate-600 pb-2">History</button>
                         </div>
                         
                         <div id="tab-content-leaderboard" class="space-y-4 overflow-y-auto max-h-60 custom-scrollbar pr-1">
-                            <!-- User Rank -->
                             <div class="flex items-center justify-between p-3 bg-yellow-50 border border-yellow-100 rounded-xl">
                                 <div class="flex items-center gap-3">
                                     <span class="font-bold text-yellow-700 w-4">4</span>
-                                    <div class="w-8 h-8 bg-green-600 rounded-full text-white flex items-center justify-center text-xs font-bold">JD</div>
+                                    <div id="lb-initials" class="w-8 h-8 bg-green-600 rounded-full text-white flex items-center justify-center text-xs font-bold">AF</div>
                                     <p class="text-sm font-bold text-slate-900">You</p>
                                 </div>
                                 <span class="text-sm font-bold text-slate-700"><span id="lb-points">120</span> Pts</span>
                             </div>
-                            <!-- Other Users -->
                             <div class="flex items-center justify-between p-2">
                                 <div class="flex items-center gap-3">
                                     <span class="font-bold text-slate-400 w-4">1</span>
@@ -489,7 +459,6 @@
                 </div>
             </div>
 
-            <!-- VIEW: MARKETPLACE (New) -->
             <div id="view-shop" class="view-section hidden space-y-6 fade-in">
                 <div class="bg-gradient-to-r from-yellow-500 to-amber-600 rounded-3xl p-6 md:p-8 text-white shadow-xl mb-8">
                     <div class="flex flex-col md:flex-row justify-between items-center gap-6">
@@ -515,11 +484,9 @@
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6" id="shop-grid">
-                    <!-- Products injected by JS -->
-                </div>
+                    </div>
             </div>
 
-            <!-- VIEW: AI CHAT -->
             <div id="view-ai-chat" class="view-section hidden h-[calc(100vh-5rem)] md:h-[calc(100vh-8rem)] flex flex-col bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden fade-in">
                 <div class="p-4 bg-slate-50/80 border-b border-slate-100 flex items-center justify-between">
                     <div class="flex items-center gap-3">
@@ -544,23 +511,21 @@
                 </div>
 
                 <div class="p-4 bg-white border-t border-slate-100">
-                    <!-- Quick Chips -->
                     <div class="flex gap-2 mb-3 overflow-x-auto no-scrollbar pb-1">
-                        <button onclick="setChatInput('🌧️ Will it rain today?')" class="whitespace-nowrap px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-full text-xs font-medium text-slate-600 transition-colors border border-slate-200">🌧️ Will it rain?</button>
-                        <button onclick="setChatInput('🍅 How to grow tomatoes?')" class="whitespace-nowrap px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-full text-xs font-medium text-slate-600 transition-colors border border-slate-200">🍅 Tomato tips</button>
-                        <button onclick="setChatInput('🐛 Pest control for Rice')" class="whitespace-nowrap px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-full text-xs font-medium text-slate-600 transition-colors border border-slate-200">🐛 Pest control</button>
+                        <button onclick="window.setChatInput('🌧️ Will it rain today?')" class="whitespace-nowrap px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-full text-xs font-medium text-slate-600 transition-colors border border-slate-200">🌧️ Will it rain?</button>
+                        <button onclick="window.setChatInput('🍅 How to grow tomatoes?')" class="whitespace-nowrap px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-full text-xs font-medium text-slate-600 transition-colors border border-slate-200">🍅 Tomato tips</button>
+                        <button onclick="window.setChatInput('🐛 Pest control for Rice')" class="whitespace-nowrap px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-full text-xs font-medium text-slate-600 transition-colors border border-slate-200">🐛 Pest control</button>
                     </div>
 
                     <div class="flex gap-2">
                         <input id="chat-input" type="text" placeholder="Type your farming question..." class="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-green-500/20 focus:border-green-500 outline-none text-slate-800 placeholder:text-slate-400">
-                        <button onclick="sendMessage()" class="p-3 bg-green-600 hover:bg-green-700 text-white rounded-xl transition-colors shadow-lg shadow-green-600/20">
+                        <button onclick="window.sendMessage()" class="p-3 bg-green-600 hover:bg-green-700 text-white rounded-xl transition-colors shadow-lg shadow-green-600/20">
                             <i data-lucide="send" size="20"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- VIEW: DISEASE SCAN -->
             <div id="view-scan" class="view-section hidden max-w-4xl mx-auto space-y-6 fade-in">
                 <div class="text-center space-y-2 mb-8 mt-4">
                     <h2 class="text-2xl md:text-3xl font-bold text-slate-900">Plant Doctor</h2>
@@ -577,14 +542,14 @@
                                 <h3 class="font-bold text-lg text-slate-800 mb-2">Upload or Take Photo</h3>
                                 <label class="cursor-pointer bg-slate-900 text-white px-8 py-3.5 rounded-full font-medium hover:bg-slate-800 transition-colors inline-flex items-center gap-2 shadow-lg shadow-slate-900/20">
                                     <i data-lucide="upload-cloud" size="18"></i> Select Image
-                                    <input type="file" class="hidden" accept="image/*" onchange="handleImageUpload(event)">
+                                    <input type="file" class="hidden" accept="image/*" onchange="window.handleImageUpload(event)">
                                 </label>
                             </div>
                         </div>
                         <div id="image-preview" class="hidden relative h-full flex flex-col">
                             <img id="preview-img" src="" alt="Preview" class="w-full h-64 object-cover rounded-xl shadow-md mb-6 border border-slate-100">
-                            <button onclick="startDiagnosis()" id="diagnose-btn" class="w-full bg-green-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-green-700 transition-colors shadow-lg shadow-green-600/20">Analyze & Earn Points</button>
-                            <button onclick="resetScan()" class="absolute top-2 right-2 p-2 bg-slate-900/50 backdrop-blur-md text-white rounded-full hover:bg-slate-900/70 transition-colors"><i data-lucide="x" size="16"></i></button>
+                            <button onclick="window.startDiagnosis()" id="diagnose-btn" class="w-full bg-green-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-green-700 transition-colors shadow-lg shadow-green-600/20">Analyze & Earn Points</button>
+                            <button onclick="window.resetScan()" class="absolute top-2 right-2 p-2 bg-slate-900/50 backdrop-blur-md text-white rounded-full hover:bg-slate-900/70 transition-colors"><i data-lucide="x" size="16"></i></button>
                         </div>
                         <div id="scan-loading" class="hidden absolute inset-0 bg-white/95 flex flex-col items-center justify-center z-10">
                             <div class="w-16 h-16 border-4 border-slate-100 border-t-green-500 rounded-full animate-spin mb-4"></div>
@@ -592,7 +557,6 @@
                         </div>
                     </div>
 
-                    <!-- Result Card -->
                     <div id="scan-result" class="hidden transition-all duration-500">
                         <div class="bg-white rounded-3xl shadow-lg border border-slate-100 overflow-hidden">
                             <div class="bg-red-50 p-6 border-b border-red-100 flex justify-between items-start">
@@ -625,16 +589,13 @@
                 </div>
             </div>
 
-            <!-- VIEW: CROP GUIDE -->
             <div id="view-crop-guide" class="view-section hidden space-y-6 fade-in">
                 <div class="mb-6">
                     <h2 class="text-2xl font-bold text-slate-900">Crop Cultivation</h2>
                     <p class="text-slate-500">Professional guides from sowing to harvest.</p>
                 </div>
-                <!-- Grid of Crops -->
                 <div id="crop-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Rice Card -->
-                    <div onclick="showCropDetail('rice')" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all group">
+                    <div onclick="window.showCropDetail('rice')" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all group">
                         <div class="h-48 overflow-hidden relative">
                              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
                             <img src="https://images.unsplash.com/photo-1536617621972-0604420b7274?auto=format&fit=crop&q=80&w=400&h=300" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
@@ -648,8 +609,7 @@
                             <span class="text-green-600 font-bold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">Read Guide <i data-lucide="arrow-right" size="16"></i></span>
                         </div>
                     </div>
-                    <!-- Tomato Card -->
-                    <div onclick="showCropDetail('tomato')" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all group">
+                    <div onclick="window.showCropDetail('tomato')" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all group">
                          <div class="h-48 overflow-hidden relative">
                              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
                             <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&q=80&w=400&h=300" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
@@ -665,10 +625,9 @@
                     </div>
                 </div>
 
-                <!-- Detail View -->
                 <div id="crop-detail" class="hidden flex-1 bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden flex flex-col md:flex-row">
                     <div class="w-full md:w-1/3 bg-slate-50 border-r border-slate-200 p-8">
-                        <button onclick="hideCropDetail()" class="mb-8 flex items-center gap-2 text-slate-500 hover:text-slate-900 font-medium transition-colors"><i data-lucide="arrow-left" size="18"></i> Back to Crops</button>
+                        <button onclick="window.hideCropDetail()" class="mb-8 flex items-center gap-2 text-slate-500 hover:text-slate-900 font-medium transition-colors"><i data-lucide="arrow-left" size="18"></i> Back to Crops</button>
                         <h2 id="detail-title" class="text-3xl font-bold text-slate-900 mb-2">Rice</h2>
                         <div class="inline-block px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-bold mb-6">Cereal Crop</div>
                         
@@ -692,13 +651,11 @@
                     <div class="flex-1 p-8 bg-white">
                         <h3 class="text-xl font-bold text-slate-900 mb-8 flex items-center gap-2"><i data-lucide="calendar" class="text-green-600"></i> Farming Timeline</h3>
                         <div class="relative border-l-2 border-slate-100 ml-3 space-y-10" id="detail-stages">
-                            <!-- Stages injected by JS -->
-                        </div>
+                            </div>
                     </div>
                 </div>
             </div>
 
-            <!-- VIEW: SOIL LAB -->
             <div id="view-soil" class="view-section hidden max-w-5xl mx-auto fade-in">
                 <div class="mb-8 mt-4">
                     <h2 class="text-2xl font-bold text-slate-900">Soil Health Lab</h2>
@@ -726,7 +683,7 @@
                                     <input type="number" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3.5 outline-none focus:ring-2 focus:ring-green-500/20 font-medium" value="30">
                                 </div>
                             </div>
-                            <button onclick="showSoilReport()" class="w-full bg-slate-900 text-white py-4 rounded-xl font-bold hover:bg-slate-800 transition-colors shadow-lg shadow-slate-900/10 mt-2">Generate Report</button>
+                            <button onclick="window.showSoilReport()" class="w-full bg-slate-900 text-white py-4 rounded-xl font-bold hover:bg-slate-800 transition-colors shadow-lg shadow-slate-900/10 mt-2">Generate Report</button>
                         </div>
                     </div>
                     <div class="md:col-span-7">
@@ -760,7 +717,6 @@
                 </div>
             </div>
 
-            <!-- VIEW: WEATHER -->
             <div id="view-weather" class="view-section hidden max-w-5xl mx-auto fade-in">
                  <div class="bg-blue-600 rounded-3xl p-8 text-white shadow-xl shadow-blue-900/20 mb-8 relative overflow-hidden">
                     <div class="absolute top-0 right-0 p-12 opacity-10">
@@ -794,14 +750,12 @@
                 </div>
                 
                 <div id="forecast-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
-                    <!-- Forecast items injected here -->
                     <div class="col-span-full p-12 text-center text-slate-400 bg-white rounded-2xl border border-slate-100 border-dashed">
                         Loading forecast data...
                     </div>
                 </div>
             </div>
 
-             <!-- VIEW: RECOMMENDATION -->
              <div id="view-recommend" class="view-section hidden max-w-2xl mx-auto bg-white rounded-3xl shadow-sm border border-slate-200 p-8 md:p-12 fade-in mt-4">
                 <div class="text-center mb-10">
                     <div class="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto text-blue-600 mb-6 shadow-sm">
@@ -823,7 +777,7 @@
                             <i data-lucide="chevron-down" class="absolute right-4 top-4 text-slate-400 pointer-events-none" size="20"></i>
                         </div>
                     </div>
-                    <button onclick="calculateRec()" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/20 text-lg">Analyze & Recommend</button>
+                    <button onclick="window.calculateRec()" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/20 text-lg">Analyze & Recommend</button>
                 </div>
                 
                 <div id="rec-loading" class="hidden py-12 text-center">
@@ -858,15 +812,14 @@
                             <div class="text-xs text-slate-400 font-medium uppercase">Est. Profit/Acre</div>
                         </div>
                     </div>
-                    <button onclick="resetRec()" class="w-full py-4 text-slate-500 font-medium hover:text-slate-900 transition-colors mt-4">Start New Analysis</button>
+                    <button onclick="window.resetRec()" class="w-full py-4 text-slate-500 font-medium hover:text-slate-900 transition-colors mt-4">Start New Analysis</button>
                 </div>
              </div>
 
         </main>
     </div>
 
-    <!-- JavaScript Logic -->
-  <script type="module">
+    <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
@@ -948,6 +901,7 @@
         window.toggleDiscount = toggleDiscount;
         window.buyProduct = buyProduct;
         window.toggleRewardTab = toggleRewardTab;
+        window.updatePointsUI = updatePointsUI;
 
         // Initialize Icons
         lucide.createIcons();
