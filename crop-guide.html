@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Crop Guide | AgroPath</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -12,15 +12,23 @@
         .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 12px; transition: 0.2s; color: #64748b; font-weight: 500; text-decoration: none; }
         .nav-item:hover { background: #f1f5f9; color: #0f172a; }
         .nav-item.active { background: #f0fdf4; color: #15803d; font-weight: 600; box-shadow: inset 0 0 0 1px rgba(22, 163, 74, 0.1); }
+        .custom-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body class="text-slate-900 h-screen flex overflow-hidden">
-    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col hidden md:flex">
-        <div class="p-6 border-b border-slate-100 flex items-center gap-3">
-            <div class="bg-green-600 p-2 rounded-xl"><i data-lucide="leaf" class="w-5 h-5 text-white"></i></div>
-            <div><h1 class="text-lg font-bold tracking-tight">AGROPATH</h1></div>
+
+    <div id="mobile-overlay" onclick="toggleMobileMenu()" class="fixed inset-0 bg-slate-900/60 z-40 hidden backdrop-blur-sm md:hidden transition-opacity"></div>
+
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-200 flex flex-col transform -translate-x-full transition-transform duration-300 ease-in-out md:relative md:translate-x-0 shadow-2xl md:shadow-none">
+        <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-green-600 p-2 rounded-xl"><i data-lucide="leaf" class="w-5 h-5 text-white"></i></div>
+                <div><h1 class="text-lg font-bold tracking-tight">AGROPATH</h1></div>
+            </div>
+            <button onclick="toggleMobileMenu()" class="md:hidden p-1 text-slate-400 hover:text-slate-600"><i data-lucide="x" size="20"></i></button>
         </div>
-        <nav class="p-4 space-y-1.5 flex-1 overflow-y-auto">
+
+        <nav class="p-4 space-y-1.5 flex-1 overflow-y-auto custom-scrollbar">
             <a href="dashboard.html" class="nav-item"><i data-lucide="layout-dashboard" size="18"></i> Dashboard</a>
             <a href="profile.html" class="nav-item"><i data-lucide="user" size="18"></i> Profile Settings</a>
             <a href="rewards.html" class="nav-item"><i data-lucide="award" size="18"></i> Rewards Zone</a>
@@ -32,88 +40,153 @@
             <a href="weather.html" class="nav-item"><i data-lucide="cloud-rain" size="18"></i> Weather</a>
             <a href="smartpick.html" class="nav-item"><i data-lucide="trending-up" size="18"></i> Smart Pick</a>
         </nav>
+
+        <div class="p-4 border-t border-slate-100">
+            <div class="bg-slate-50 rounded-xl p-3 flex items-center gap-3 border border-slate-100 cursor-pointer hover:bg-slate-100" onclick="window.location.href='profile.html'">
+                <img id="sidebar-avatar" src="https://ui-avatars.com/api/?name=Farmer&background=16a34a&color=fff" class="w-9 h-9 rounded-full object-cover">
+                <div class="flex-1 overflow-hidden">
+                    <p id="sidebar-name" class="text-sm font-bold text-slate-900 truncate">Loading...</p>
+                    <p class="text-[10px] text-slate-500 font-medium">View Profile</p>
+                </div>
+            </div>
+        </div>
     </aside>
 
-    <div class="flex-1 flex flex-col h-full relative w-full">
-        <header class="bg-white/80 backdrop-blur-md sticky top-0 z-30 border-b border-slate-200 px-8 py-4 flex items-center justify-between">
-            <h2 class="text-xl font-bold text-slate-800">Crop Guide</h2>
-            <button onclick="logoutUser()" class="flex items-center gap-2 px-3 py-1.5 bg-red-50 text-red-600 rounded-xl font-bold"><i data-lucide="log-out" size="16"></i> Logout</button>
+    <div class="flex-1 flex flex-col h-full relative w-full overflow-hidden">
+        <header class="bg-white/80 backdrop-blur-md sticky top-0 z-30 border-b border-slate-200 px-4 md:px-8 py-4 flex items-center justify-between shadow-sm">
+            <div class="flex items-center gap-3">
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 -ml-2 text-slate-600 hover:bg-slate-100 rounded-xl"><i data-lucide="menu" size="24"></i></button>
+                <h2 class="text-lg md:text-xl font-bold text-slate-800">Crop Guide</h2>
+            </div>
+            <div class="flex items-center gap-3 md:gap-4">
+                <button onclick="logoutUser()" class="hidden md:flex items-center gap-2 px-3 py-1.5 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition-colors border border-red-100 text-sm font-bold"><i data-lucide="log-out" size="16"></i> Logout</button>
+                <button onclick="logoutUser()" class="md:hidden p-2 text-red-500 hover:bg-red-50 rounded-full"><i data-lucide="log-out" size="20"></i></button>
+            </div>
         </header>
 
-        <main class="flex-1 overflow-y-auto p-8">
-            <div class="mb-6">
-                <h2 class="text-2xl font-bold text-slate-900">Crop Cultivation</h2>
-                <p class="text-slate-500">Professional guides from sowing to harvest.</p>
-            </div>
-            
-            <div id="crop-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div onclick="showCropDetail('rice')" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg transition-all">
-                    <div class="h-48 overflow-hidden relative">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
-                        <img src="https://images.unsplash.com/photo-1536617621972-0604420b7274?auto=format&fit=crop&q=80&w=400&h=300" class="w-full h-full object-cover">
-                        <div class="absolute bottom-4 left-4 z-20"><h3 class="text-xl font-bold text-white">Rice (Paddy)</h3></div>
-                    </div>
-                    <div class="p-5"><p class="text-sm text-slate-500">Complete guide covering nursery preparation...</p></div>
+        <main class="flex-1 overflow-y-auto p-4 md:p-8">
+            <div id="crop-list-view">
+                <div class="mb-6">
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-1">Cultivation Guides</h2>
+                    <p class="text-slate-500 text-sm md:text-base">Professional guides from sowing to harvest.</p>
                 </div>
-
-                <div onclick="showCropDetail('tomato')" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg transition-all">
-                    <div class="h-48 overflow-hidden relative">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
-                        <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&q=80&w=400&h=300" class="w-full h-full object-cover">
-                        <div class="absolute bottom-4 left-4 z-20"><h3 class="text-xl font-bold text-white">Tomato</h3></div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div onclick="window.showCropDetail('rice')" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg transition-all group">
+                        <div class="h-48 overflow-hidden relative">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1536617621972-0604420b7274?auto=format&fit=crop&q=80&w=400&h=300" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute bottom-4 left-4 z-20"><h3 class="text-xl font-bold text-white">Rice (Paddy)</h3></div>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-sm text-slate-500 mb-4 line-clamp-2">Complete guide covering nursery preparation, transplanting, and water management.</p>
+                            <span class="text-green-600 font-bold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">Read Guide <i data-lucide="arrow-right" size="16"></i></span>
+                        </div>
                     </div>
-                    <div class="p-5"><p class="text-sm text-slate-500">Learn staking, pruning, and fertigation techniques.</p></div>
+
+                    <div onclick="window.showCropDetail('tomato')" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg transition-all group">
+                        <div class="h-48 overflow-hidden relative">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&q=80&w=400&h=300" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute bottom-4 left-4 z-20"><h3 class="text-xl font-bold text-white">Tomato</h3></div>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-sm text-slate-500 mb-4 line-clamp-2">Learn staking, pruning, and fertigation techniques for high yield.</p>
+                            <span class="text-green-600 font-bold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">Read Guide <i data-lucide="arrow-right" size="16"></i></span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div id="crop-detail" class="hidden flex-1 bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden flex flex-col md:flex-row">
-                <div class="w-full md:w-1/3 bg-slate-50 border-r border-slate-200 p-8">
-                    <button onclick="hideCropDetail()" class="mb-8 font-bold text-green-600">← Back</button>
+            <div id="crop-detail-view" class="hidden flex-col md:flex-row bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="w-full md:w-1/3 bg-slate-50 border-b md:border-b-0 md:border-r border-slate-200 p-6 md:p-8">
+                    <button onclick="window.hideCropDetail()" class="mb-6 font-bold text-green-600 flex items-center gap-2 hover:text-green-700"><i data-lucide="arrow-left" size="18"></i> Back to list</button>
                     <h2 id="detail-title" class="text-3xl font-bold text-slate-900 mb-6">Crop Name</h2>
-                    <div class="p-4 bg-white rounded-xl shadow-sm mb-4"><p class="text-xs text-slate-400 font-bold uppercase">Yield</p><p class="text-lg font-bold">5 Tons / Hectare</p></div>
-                    <div class="p-4 bg-white rounded-xl shadow-sm"><p class="text-xs text-slate-400 font-bold uppercase">Water</p><p class="text-lg font-bold">High Requirement</p></div>
+                    
+                    <div class="p-4 bg-white rounded-xl shadow-sm mb-4 border border-slate-100">
+                        <p class="text-xs text-slate-400 font-bold uppercase mb-1 flex items-center gap-2"><i data-lucide="scale" size="14"></i> Expected Yield</p>
+                        <p class="text-lg font-bold text-slate-800">5 Tons / Hectare</p>
+                    </div>
+                    <div class="p-4 bg-white rounded-xl shadow-sm border border-slate-100">
+                        <p class="text-xs text-slate-400 font-bold uppercase mb-1 flex items-center gap-2"><i data-lucide="droplets" size="14"></i> Water Need</p>
+                        <p class="text-lg font-bold text-slate-800">High Requirement</p>
+                    </div>
                 </div>
-                <div class="flex-1 p-8">
-                    <h3 class="text-xl font-bold text-slate-900 mb-8">Farming Timeline</h3>
-                    <div class="border-l-2 border-slate-100 ml-3 space-y-6" id="detail-stages"></div>
+                <div class="flex-1 p-6 md:p-8">
+                    <h3 class="text-xl font-bold text-slate-900 mb-8 flex items-center gap-2"><i data-lucide="calendar" class="text-green-600"></i> Farming Timeline</h3>
+                    <div class="border-l-2 border-green-100 ml-3 space-y-8" id="detail-stages"></div>
                 </div>
             </div>
         </main>
     </div>
 
     <script>
-        const cropData = {
-            rice: { title: 'Rice (Paddy)', stages: [{ t: 'Nursery', d: 'Soak seeds for 24h.' }, { t: 'Transplanting', d: 'Transplant 21-day old seedlings.' }] },
-            tomato: { title: 'Tomato', stages: [{ t: 'Sowing', d: 'Sow in pro-trays.' }, { t: 'Staking', d: 'Support plants to keep fruits off ground.' }] }
+        window.toggleMobileMenu = function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobile-overlay');
+            if (sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
         };
-        function showCropDetail(cropId) {
-            document.getElementById('crop-list').classList.add('hidden');
-            document.getElementById('crop-detail').classList.remove('hidden');
+
+        const cropData = {
+            rice: { title: 'Rice (Paddy)', stages: [{ t: 'Nursery Prep', d: 'Soak seeds for 24h before sowing in wet bed.' }, { t: 'Transplanting', d: 'Transplant 21-day old seedlings. Maintain 2cm water.' }, { t: 'Nutrients', d: 'Apply Nitrogen in splits.' }, { t: 'Harvest', d: 'Harvest when 80% grains are golden.' }] },
+            tomato: { title: 'Tomato', stages: [{ t: 'Sowing', d: 'Sow in pro-trays with cocopeat.' }, { t: 'Transplanting', d: 'Transplant 25-day old seedlings in raised beds.' }, { t: 'Staking', d: 'Provide support using stakes or trellis.' }, { t: 'Harvest', d: 'Pick fruits at breaker stage.' }] }
+        };
+
+        window.showCropDetail = function(cropId) {
+            document.getElementById('crop-list-view').classList.add('hidden');
+            document.getElementById('crop-detail-view').classList.remove('hidden');
+            document.getElementById('crop-detail-view').classList.add('flex');
+            
             document.getElementById('detail-title').innerText = cropData[cropId].title;
-            document.getElementById('detail-stages').innerHTML = cropData[cropId].stages.map(s => `<div class="pl-8 mb-4"><b>${s.t}</b><br><span class="text-slate-500">${s.d}</span></div>`).join('');
+            
+            const stagesHtml = cropData[cropId].stages.map((s, i) => `
+                <div class="relative pl-8">
+                    <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-green-500 border-4 border-white shadow-sm"></div>
+                    <h4 class="font-bold text-slate-900 text-lg mb-1">Stage ${i+1}: ${s.t}</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed">${s.d}</p>
+                </div>
+            `).join('');
+            document.getElementById('detail-stages').innerHTML = stagesHtml;
         }
-        function hideCropDetail() {
-            document.getElementById('crop-detail').classList.add('hidden');
-            document.getElementById('crop-list').classList.remove('hidden');
+
+        window.hideCropDetail = function() {
+            document.getElementById('crop-detail-view').classList.add('hidden');
+            document.getElementById('crop-detail-view').classList.remove('flex');
+            document.getElementById('crop-list-view').classList.remove('hidden');
         }
+
+        lucide.createIcons();
     </script>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-       const firebaseConfig = {
-  apiKey: "AIzaSyDyZ5c3whwanxBvmrPtPIGpjw5t2s2LHXc",
-  authDomain: "agropath-6d8ea.firebaseapp.com",
-  projectId: "agropath-6d8ea",
-  storageBucket: "agropath-6d8ea.firebasestorage.app",
-  messagingSenderId: "234293564294",
-  appId: "1:234293564294:web:ac33138d93ca565d9dd207",
-  measurementId: "G-TRKFSVR8WD"
-};
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyDyZ5c3whwanxBvmrPtPIGpjw5t2s2LHXc",
+            authDomain: "agropath-6d8ea.firebaseapp.com",
+            projectId: "agropath-6d8ea",
+            storageBucket: "agropath-6d8ea.firebasestorage.app",
+            messagingSenderId: "234293564294",
+            appId: "1:234293564294:web:ac33138d93ca565d9dd207",
+            measurementId: "G-TRKFSVR8WD"
+        };
         const app = initializeApp(firebaseConfig); const auth = getAuth(app);
-        onAuthStateChanged(auth, (user) => { if (!user) window.location.href = "index.html"; });
+
+        onAuthStateChanged(auth, (user) => {
+            if (!user) window.location.href = "index.html"; 
+            else {
+                document.getElementById('sidebar-name').innerText = user.displayName || "Farmer";
+                if(user.photoURL) document.getElementById('sidebar-avatar').src = user.photoURL;
+            }
+        });
         window.logoutUser = () => signOut(auth);
-        lucide.createIcons();
     </script>
 </body>
 </html>
