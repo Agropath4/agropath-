@@ -76,7 +76,15 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        const firebaseConfig = { apiKey: "YOUR_API_KEY", authDomain: "YOUR_PROJECT_ID.firebaseapp.com", projectId: "YOUR_PROJECT_ID", storageBucket: "YOUR_PROJECT_ID.appspot.com", messagingSenderId: "YOUR_ID", appId: "YOUR_APP_ID" };
+      const firebaseConfig = {
+  apiKey: "AIzaSyDyZ5c3whwanxBvmrPtPIGpjw5t2s2LHXc",
+  authDomain: "agropath-6d8ea.firebaseapp.com",
+  projectId: "agropath-6d8ea",
+  storageBucket: "agropath-6d8ea.firebasestorage.app",
+  messagingSenderId: "234293564294",
+  appId: "1:234293564294:web:ac33138d93ca565d9dd207",
+  measurementId: "G-TRKFSVR8WD"
+};
         const app = initializeApp(firebaseConfig); const auth = getAuth(app);
         
         onAuthStateChanged(auth, (user) => {
