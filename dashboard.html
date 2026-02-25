@@ -866,33 +866,114 @@
     </div>
 
     <!-- JavaScript Logic -->
-    <script>
+  <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // IMPORTANT: REPLACE THIS OBJECT WITH YOUR ACTUAL FIREBASE KEYS
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // --- AUTHENTICATION LOGIC ---
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                // Kick unauthorized users back to login
+                window.location.href = "index.html";
+            } else {
+                // User is authenticated, update the UI with their info
+                if (user.displayName) {
+                    // Update Sidebar Name
+                    document.getElementById('sidebar-name').innerText = user.displayName;
+                    
+                    // Create Initials for Avatar (e.g., John Doe -> JD)
+                    const nameParts = user.displayName.split(' ');
+                    let initials = nameParts[0].charAt(0).toUpperCase();
+                    if (nameParts.length > 1) {
+                        initials += nameParts[nameParts.length - 1].charAt(0).toUpperCase();
+                    }
+                    document.getElementById('sidebar-initials').innerText = initials;
+                    document.getElementById('lb-initials').innerText = initials;
+                } else {
+                    document.getElementById('sidebar-name').innerText = "AgroPath Farmer";
+                    document.getElementById('sidebar-initials').innerText = "AF";
+                }
+            }
+        });
+
+        // Expose Logout function to global scope
+        window.logoutUser = function() {
+            signOut(auth).then(() => {
+                // The observer above will handle the redirect
+            }).catch((error) => {
+                alert("Error logging out: " + error.message);
+            });
+        };
+
+        // --- BROWSER BACK BUTTON FIX ---
+        // Push an initial state so the back button doesn't leave the page immediately
+        history.pushState({ view: 'dashboard' }, null, '');
+
+        window.addEventListener('popstate', function(event) {
+            // When the back button is pressed, always return to the dashboard view
+            // instead of exiting the app/logging out
+            window.switchTab('dashboard');
+            // Re-push the state so they can't go back further
+            history.pushState({ view: 'dashboard' }, null, '');
+        });
+
+        // Make functions globally accessible so HTML onclick handlers can reach them
+        window.initRealTime = initRealTime;
+        window.switchTab = switchTab;
+        window.selectExperience = selectExperience;
+        window.toggleMobileMenu = toggleMobileMenu;
+        window.setChatInput = setChatInput;
+        window.sendMessage = sendMessage;
+        window.handleImageUpload = handleImageUpload;
+        window.startDiagnosis = startDiagnosis;
+        window.resetScan = resetScan;
+        window.showCropDetail = showCropDetail;
+        window.hideCropDetail = hideCropDetail;
+        window.showSoilReport = showSoilReport;
+        window.calculateRec = calculateRec;
+        window.resetRec = resetRec;
+        window.toggleDiscount = toggleDiscount;
+        window.buyProduct = buyProduct;
+        window.toggleRewardTab = toggleRewardTab;
+
         // Initialize Icons
         lucide.createIcons();
 
         // --- State Variables ---
-        let userPoints = 120; // Default points
-        let userLevel = 1;
+        window.userPoints = 120; // Default points
+        window.userLevel = 1;
         const pointsPerLevel = 200;
 
         // --- Onboarding Logic ---
         function selectExperience(level) {
             const overlay = document.getElementById('onboarding-overlay');
-            overlay.classList.add('opacity-0', 'pointer-events-none');
-            setTimeout(() => overlay.remove(), 500); 
+            if(overlay) {
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+                setTimeout(() => overlay.remove(), 500); 
+            }
 
             if (level === 'beginner') {
-                // Beginners go to Crop Guide (Listing Platform)
-                switchTab('crop-guide');
+                window.switchTab('crop-guide');
             } else {
-                // Others go to Dashboard
-                switchTab('dashboard');
+                window.switchTab('dashboard');
             }
             
-            // Start fetching real data
             initRealTime();
             renderMarketplace();
-            renderRewards(); // Init Rewards UI
+            renderRewards(); 
         }
 
         // --- Reward System Logic ---
@@ -900,7 +981,7 @@
             const els = [document.getElementById('user-points'), document.getElementById('banner-points'), document.getElementById('shop-points'), document.getElementById('lb-points'), document.getElementById('points-progress-text')];
             els.forEach(el => {
                 if(el) {
-                    el.innerText = userPoints;
+                    el.innerText = window.userPoints;
                     el.classList.add('animate-pop');
                     setTimeout(() => el.classList.remove('animate-pop'), 300);
                 }
@@ -908,8 +989,9 @@
             updateTreeProgress();
         }
 
-        function showRewardToast(msg) {
+        window.showRewardToast = function(msg) {
             const toast = document.getElementById('reward-toast');
+            if(!toast) return;
             if(msg) toast.querySelector('h4').innerText = msg;
             toast.classList.remove('translate-x-[150%]');
             setTimeout(() => {
@@ -937,40 +1019,35 @@
         }
 
         function updateTreeProgress() {
-            const progress = (userPoints % pointsPerLevel) / pointsPerLevel * 100;
+            const progress = (window.userPoints % pointsPerLevel) / pointsPerLevel * 100;
             const bar = document.getElementById('points-progress-bar');
             if(bar) bar.style.width = `${progress}%`;
 
-            // Check Level Up
-            const newLevel = Math.floor(userPoints / pointsPerLevel) + 1;
-            if(newLevel > userLevel) {
-                userLevel = newLevel;
-                document.getElementById('level-display').innerText = userLevel;
-                document.getElementById('tree-level-display').innerText = userLevel;
-                document.getElementById('sidebar-level').innerText = userLevel;
+            const newLevel = Math.floor(window.userPoints / pointsPerLevel) + 1;
+            if(newLevel > window.userLevel) {
+                window.userLevel = newLevel;
+                document.getElementById('level-display').innerText = window.userLevel;
+                document.getElementById('tree-level-display').innerText = window.userLevel;
+                document.getElementById('sidebar-level').innerText = window.userLevel;
                 
-                // Visual Tree Upgrade
                 const treeIcon = document.getElementById('tree-icon');
-                if(userLevel >= 2) {
+                if(window.userLevel >= 2) {
                     treeIcon.setAttribute('data-lucide', 'tree-deciduous'); 
                     lucide.createIcons();
                 }
                 
-                // Bonus
-                alert(`🎉 Level Up! You reached Level ${userLevel}. Bonus +50 Points!`);
-                userPoints += 50;
+                alert(`🎉 Level Up! You reached Level ${window.userLevel}. Bonus +50 Points!`);
+                window.userPoints += 50;
                 updatePointsUI();
             }
         }
 
         function renderRewards() {
-            // Initial render call to set up progress bar
             updateTreeProgress();
         }
 
         // --- Real-time Logic ---
         async function initRealTime() {
-            // UI State: Loading
             const weatherContent = document.getElementById('weather-content');
             const weatherSkeleton = document.getElementById('weather-skeleton');
             
@@ -989,7 +1066,6 @@
                     const lat = position.coords.latitude;
                     const lon = position.coords.longitude;
                     
-                    // -- Set Google Weather Link --
                     const googleUrl = `https://www.google.com/search?q=weather+at+${lat},${lon}`;
                     const linkBtn = document.getElementById('google-weather-btn');
                     if(linkBtn) {
@@ -998,7 +1074,6 @@
                     }
 
                     try {
-                        // 1. Get Location Name
                         const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`);
                         if(!geoRes.ok) throw new Error('Geo failed');
                         const geoData = await geoRes.json();
@@ -1006,7 +1081,6 @@
                         const region = geoData.address.state || "";
                         updateLocationText(`${city}, ${region}`);
 
-                        // 2. Get Weather
                         const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto`;
                         const weatherRes = await fetch(url);
                         if(!weatherRes.ok) throw new Error('Weather failed');
@@ -1016,13 +1090,12 @@
                         updateAlertsUI(weatherData.current);
                         updateForecastUI(weatherData.daily);
                         
-                        // UI State: Success
                         if (weatherSkeleton) weatherSkeleton.classList.add('hidden');
                         if (weatherContent) weatherContent.classList.remove('hidden');
                         
                     } catch (e) {
                         console.error("API Error", e);
-                        useFallbackData(); // Graceful Degradation
+                        useFallbackData(); 
                     }
 
                 }, (error) => {
@@ -1034,7 +1107,6 @@
             }
         }
 
-        // Fallback if API fails or permission denied
         function useFallbackData() {
             updateLocationText("Demo Farm (Preview)");
             const mockCurrent = { temperature_2m: 28, relative_humidity_2m: 65, wind_speed_10m: 12, weather_code: 1 };
@@ -1083,7 +1155,6 @@
             };
             const conditionText = conditions[code] || 'Cloudy';
 
-            // Dashboard
             const dashTemp = document.getElementById('dash-temp');
             if(dashTemp) dashTemp.innerText = `${temp}°C`;
             const dashHum = document.getElementById('dash-humidity');
@@ -1091,13 +1162,11 @@
             const dashWind = document.getElementById('dash-wind');
             if(dashWind) dashWind.innerHTML = `${wind} <span class="text-xs text-slate-400">km/h</span>`;
             
-            // Weather Tab
             const tabTemp = document.getElementById('tab-weather-temp');
             if(tabTemp) tabTemp.innerText = `${temp}°`;
             const tabCond = document.getElementById('tab-weather-condition');
             if(tabCond) tabCond.innerText = conditionText;
 
-            // Advisory Logic
             const advisoryList = document.getElementById('farm-advisory-list');
             if(advisoryList) {
                 let advisoryHTML = '';
@@ -1139,7 +1208,6 @@
             if (current.relative_humidity_2m > 85) alertsHTML += addAlert('alert-triangle', 'red', 'Fungal Risk', 'Humidity > 85%. Check for blight.');
             if (current.temperature_2m > 35) alertsHTML += addAlert('sun', 'orange', 'Heat Stress', 'Increase water supply.');
             
-            // Market Alert (Static)
             alertsHTML += addAlert('trending-up', 'green', 'Market Update', 'Potato prices up 12%.');
 
             container.innerHTML = alertsHTML;
@@ -1211,11 +1279,11 @@
                         
                         <div class="flex items-center justify-between">
                             <label class="inline-flex items-center cursor-pointer">
-                                <input type="checkbox" class="peer sr-only" onchange="toggleDiscount(this, ${p.id}, ${p.price})">
+                                <input type="checkbox" class="peer sr-only" onchange="window.toggleDiscount(this, ${p.id}, ${p.price})">
                                 <div class="relative w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-yellow-400"></div>
                                 <span class="ms-2 text-xs font-medium text-slate-500">Use Points</span>
                             </label>
-                            <button onclick="buyProduct('${p.name}')" class="bg-slate-900 text-white p-2 rounded-lg hover:bg-slate-800 transition-colors">
+                            <button onclick="window.buyProduct('${p.name}')" class="bg-slate-900 text-white p-2 rounded-lg hover:bg-slate-800 transition-colors">
                                 <i data-lucide="shopping-cart" size="18"></i>
                             </button>
                         </div>
@@ -1230,11 +1298,10 @@
             const cardPrice = checkbox.closest('.p-5').querySelector('.text-green-700');
             
             if(checkbox.checked) {
-                if(userPoints >= 50) {
+                if(window.userPoints >= 50) {
                     oldPriceEl.innerText = `₹${price}`;
-                    const discount = Math.round(price * 0.8); // 20% off
+                    const discount = Math.round(price * 0.8); 
                     cardPrice.innerText = `₹${discount}`;
-                    // Don't deduct points yet, just visual
                 } else {
                     checkbox.checked = false;
                     alert("Not enough AgroPoints! Scan your farm to earn more.");
@@ -1276,7 +1343,6 @@
             const titleEl = document.getElementById('header-title');
             if(titleEl) titleEl.innerText = titles[tabId];
 
-            // AUTO-CLOSE Sidebar on Mobile when a tab is clicked
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('mobile-overlay');
             if (sidebar && !sidebar.classList.contains('-translate-x-full')) {
@@ -1310,7 +1376,7 @@
             const input = document.getElementById('chat-input');
             if(input) {
                 input.value = text;
-                sendMessage();
+                window.sendMessage();
             }
         }
 
@@ -1332,7 +1398,6 @@
             input.value = '';
             container.scrollTop = container.scrollHeight;
 
-            // Simulating AI typing delay
             setTimeout(() => {
                 let reply = "Based on agricultural best practices, ensure you monitor soil moisture regularly.";
                 if(text.toLowerCase().includes('rain')) reply = "Current forecasts show a high chance of rain. I recommend pausing any scheduled irrigation for 24 hours.";
@@ -1353,7 +1418,7 @@
         const chatInput = document.getElementById('chat-input');
         if(chatInput) {
             chatInput.addEventListener('keypress', function (e) {
-                if (e.key === 'Enter') sendMessage();
+                if (e.key === 'Enter') window.sendMessage();
             });
         }
 
@@ -1385,10 +1450,9 @@
                 if(res) res.classList.remove('hidden');
                 if(btn) btn.disabled = false;
                 
-                // GAMIFICATION: Add Points!
-                userPoints += 50;
+                window.userPoints += 50;
                 updatePointsUI();
-                showRewardToast("+50 AgroPoints!");
+                window.showRewardToast("+50 AgroPoints!");
                 
                 lucide.createIcons();
             }, 2000);
@@ -1472,9 +1536,6 @@
             document.getElementById('rec-result').classList.add('hidden');
             document.getElementById('rec-form').classList.remove('hidden');
         }
-
-        // NOTE: initRealTime is NOT called automatically here.
-        // It is triggered by the onboarding selection.
 
     </script>
 </body>
