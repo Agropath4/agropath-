@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AGROPATH - Future of Farming</title>
+    <title>AgroPath – Smart Agriculture Technology Platform</title>
     <meta name="description" content="AgroPath is a smart agriculture platform helping farmers with technology, youth engagement, crop data, and modern farming solutions.">
     <meta name="keywords" content="AgroPath, agriculture website, smart farming, agri technology, youth in farming, digital agriculture">
     <meta name="author" content="AgroPath Team">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -80,7 +80,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 relative z-10">
-                <button onclick="window.selectExperience('beginner')" class="group p-6 md:p-8 rounded-2xl border-2 border-slate-100 hover:border-green-500 hover:bg-green-50/50 transition-all text-left hover:shadow-xl hover:shadow-green-500/10 relative overflow-hidden flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0">
+                <button onclick="selectExperience('beginner')" class="group p-6 md:p-8 rounded-2xl border-2 border-slate-100 hover:border-green-500 hover:bg-green-50/50 transition-all text-left hover:shadow-xl hover:shadow-green-500/10 relative overflow-hidden flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0">
                     <div class="w-12 h-12 md:w-16 md:h-16 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center md:mb-6 text-2xl md:text-3xl shadow-sm group-hover:scale-110 transition-transform shrink-0">🌱</div>
                     <div>
                         <h3 class="text-lg md:text-2xl font-bold text-slate-900 mb-1 md:mb-2">Beginner</h3>
@@ -91,7 +91,7 @@
                     </div>
                 </button>
 
-                <button onclick="window.selectExperience('intermediate')" class="group p-6 md:p-8 rounded-2xl border-2 border-slate-100 hover:border-blue-500 hover:bg-blue-50/50 transition-all text-left hover:shadow-xl hover:shadow-blue-500/10 relative overflow-hidden flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0">
+                <button onclick="selectExperience('intermediate')" class="group p-6 md:p-8 rounded-2xl border-2 border-slate-100 hover:border-blue-500 hover:bg-blue-50/50 transition-all text-left hover:shadow-xl hover:shadow-blue-500/10 relative overflow-hidden flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0">
                     <div class="w-12 h-12 md:w-16 md:h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center md:mb-6 text-2xl md:text-3xl shadow-sm group-hover:scale-110 transition-transform shrink-0">🌿</div>
                     <div>
                         <h3 class="text-lg md:text-2xl font-bold text-slate-900 mb-1 md:mb-2">Intermediate</h3>
@@ -102,7 +102,7 @@
                     </div>
                 </button>
 
-                <button onclick="window.selectExperience('expert')" class="group p-6 md:p-8 rounded-2xl border-2 border-slate-100 hover:border-purple-500 hover:bg-purple-50/50 transition-all text-left hover:shadow-xl hover:shadow-purple-500/10 relative overflow-hidden flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0">
+                <button onclick="selectExperience('expert')" class="group p-6 md:p-8 rounded-2xl border-2 border-slate-100 hover:border-purple-500 hover:bg-purple-50/50 transition-all text-left hover:shadow-xl hover:shadow-purple-500/10 relative overflow-hidden flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0">
                     <div class="w-12 h-12 md:w-16 md:h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center md:mb-6 text-2xl md:text-3xl shadow-sm group-hover:scale-110 transition-transform shrink-0">🚜</div>
                     <div>
                         <h3 class="text-lg md:text-2xl font-bold text-slate-900 mb-1 md:mb-2">Expert</h3>
@@ -116,7 +116,7 @@
         </div>
     </div>
 
-    <div id="mobile-overlay" onclick="window.toggleMobileMenu()" class="fixed inset-0 bg-slate-900/60 z-40 hidden backdrop-blur-sm lg:hidden transition-opacity"></div>
+    <div id="mobile-overlay" onclick="toggleMobileMenu()" class="fixed inset-0 bg-slate-900/60 z-40 hidden backdrop-blur-sm lg:hidden transition-opacity"></div>
 
     <aside id="sidebar" class="fixed top-0 left-0 z-50 h-full w-64 bg-white border-r border-slate-200 transition-transform duration-300 ease-in-out -translate-x-full lg:translate-x-0 lg:static flex-shrink-0 flex flex-col shadow-2xl lg:shadow-none">
         <div class="p-6 flex items-center justify-between border-b border-slate-100">
@@ -129,49 +129,50 @@
                     <p class="text-[10px] text-slate-500 font-bold uppercase tracking-wide">Smart Farming</p>
                 </div>
             </div>
-            <button onclick="window.toggleMobileMenu()" class="lg:hidden p-1 text-slate-400 hover:text-slate-600 transition-colors">
+            <button onclick="toggleMobileMenu()" class="lg:hidden p-1 text-slate-400 hover:text-slate-600 transition-colors">
                 <i data-lucide="x" size="20"></i>
             </button>
         </div>
 
         <nav class="p-4 space-y-1.5 flex-1 overflow-y-auto custom-scrollbar">
-            <button onclick="window.switchTab('dashboard')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-semibold bg-green-50 text-green-700 ring-1 ring-green-600/10" data-tab="dashboard">
+            <button onclick="switchTab('dashboard')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-semibold bg-green-50 text-green-700 ring-1 ring-green-600/10" data-tab="dashboard">
                 <i data-lucide="layout-dashboard" size="18"></i> <span class="text-sm">Dashboard</span>
             </button>
-            <button onclick="window.switchTab('rewards')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="rewards">
+            <button onclick="switchTab('rewards')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="rewards">
                 <i data-lucide="award" size="18"></i> <span class="text-sm">Rewards Zone</span>
             </button>
-            <button onclick="window.switchTab('shop')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="shop">
+            <button onclick="switchTab('shop')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="shop">
                 <i data-lucide="shopping-bag" size="18"></i> <span class="text-sm">AgroShop</span> <span class="ml-auto text-[10px] bg-red-100 text-red-600 px-2 py-0.5 rounded-full font-bold">New</span>
             </button>
-            <button onclick="window.switchTab('ai-chat')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="ai-chat">
+            <button onclick="switchTab('ai-chat')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="ai-chat">
                 <i data-lucide="message-square" size="18"></i> <span class="text-sm">AgroGenius AI</span>
             </button>
-            <button onclick="window.switchTab('scan')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="scan">
+            <button onclick="switchTab('scan')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="scan">
                 <i data-lucide="scan" size="18"></i> <span class="text-sm">Disease Scan</span>
             </button>
-            <button onclick="window.switchTab('crop-guide')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="crop-guide">
+            <button onclick="switchTab('crop-guide')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="crop-guide">
                 <i data-lucide="sprout" size="18"></i> <span class="text-sm">Crop Guide</span>
             </button>
-            <button onclick="window.switchTab('soil')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="soil">
+            <button onclick="switchTab('soil')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="soil">
                 <i data-lucide="beaker" size="18"></i> <span class="text-sm">Soil Lab</span>
             </button>
-            <button onclick="window.switchTab('weather')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="weather">
+            <button onclick="switchTab('weather')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="weather">
                 <i data-lucide="cloud-rain" size="18"></i> <span class="text-sm">Weather</span>
             </button>
-            <button onclick="window.switchTab('recommend')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="recommend">
+            <button onclick="switchTab('recommend')" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900" data-tab="recommend">
                 <i data-lucide="trending-up" size="18"></i> <span class="text-sm">Smart Pick</span>
             </button>
         </nav>
 
         <div class="p-4 border-t border-slate-100">
-            <div class="bg-yellow-50 rounded-xl p-3 mb-3 border border-yellow-100 flex justify-between items-center cursor-pointer hover:bg-yellow-100 transition-colors group" onclick="window.switchTab('rewards')">
+            <div class="bg-yellow-50 rounded-xl p-3 mb-3 border border-yellow-100 flex justify-between items-center cursor-pointer hover:bg-yellow-100 transition-colors group" onclick="switchTab('rewards')">
                 <div class="flex items-center gap-2">
                     <i data-lucide="star" class="text-yellow-500 fill-yellow-500 group-hover:scale-110 transition-transform" size="16"></i>
                     <span class="text-xs font-bold text-yellow-700">AgroPoints</span>
                 </div>
                 <span id="user-points" class="text-sm font-bold text-yellow-800">120</span>
             </div>
+            
             <div class="bg-slate-50 rounded-xl p-3 flex items-center gap-3 border border-slate-100">
                 <div id="sidebar-initials" class="w-9 h-9 rounded-full bg-green-600 flex items-center justify-center text-white font-bold text-xs shadow-sm">AF</div>
                 <div class="flex-1 overflow-hidden">
@@ -185,14 +186,14 @@
     <div class="flex-1 flex flex-col h-full relative w-full bg-slate-50">
         <header class="bg-white/80 backdrop-blur-md sticky top-0 z-30 border-b border-slate-200 px-4 md:px-8 py-3 md:py-4 flex items-center justify-between shadow-sm">
             <div class="flex items-center gap-3">
-                <button onclick="window.toggleMobileMenu()" class="lg:hidden p-2 -ml-2 hover:bg-slate-100 rounded-xl text-slate-600 transition-colors">
+                <button onclick="toggleMobileMenu()" class="lg:hidden p-2 -ml-2 hover:bg-slate-100 rounded-xl text-slate-600 transition-colors">
                     <i data-lucide="menu" size="24"></i>
                 </button>
                 <h2 id="header-title" class="text-lg md:text-xl font-bold text-slate-800">Dashboard</h2>
             </div>
             
             <div class="flex items-center gap-3">
-                <div onclick="window.initRealTime()" class="hidden md:flex flex-col items-end cursor-pointer group">
+                <div onclick="initRealTime()" class="hidden md:flex flex-col items-end cursor-pointer group">
                     <div class="flex items-center gap-1.5 text-sm font-bold text-slate-700 group-hover:text-green-600 transition-colors">
                         <i data-lucide="map-pin" size="14" class="text-green-600"></i>
                         <span id="header-location-text">Locating...</span>
@@ -200,15 +201,15 @@
                     <span class="text-[10px] text-slate-400 font-medium">Tap to refresh</span>
                 </div>
                 <div class="h-8 w-px bg-slate-200 mx-2 hidden md:block"></div>
-                <button onclick="window.switchTab('rewards')" class="relative p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-all hover:text-slate-900">
+                <button onclick="switchTab('rewards')" class="relative p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-all hover:text-slate-900">
                     <i data-lucide="bell" size="22"></i>
                     <span class="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full ring-2 ring-white"></span>
                 </button>
-                
-                <button onclick="window.logoutUser()" class="hidden md:flex items-center gap-2 ml-2 px-3 py-1.5 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition-colors border border-red-100 text-sm font-bold">
+
+                <button onclick="logoutUser()" class="hidden md:flex items-center gap-2 ml-2 px-3 py-1.5 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition-colors border border-red-100 text-sm font-bold shadow-sm">
                     <i data-lucide="log-out" size="16"></i> Logout
                 </button>
-                <button onclick="window.logoutUser()" class="md:hidden p-2 text-red-500 hover:bg-red-50 rounded-full transition-all ml-1">
+                <button onclick="logoutUser()" class="md:hidden p-2 text-red-500 hover:bg-red-50 rounded-full transition-all ml-1">
                     <i data-lucide="log-out" size="22"></i>
                 </button>
             </div>
@@ -225,10 +226,10 @@
                                 You have <strong><span id="banner-points">120</span> AgroPoints</strong>. Use them to get discounts on fertilizers and tools in the AgroShop.
                             </p>
                             <div class="flex flex-wrap gap-3 mt-6">
-                                <button onclick="window.switchTab('shop')" class="flex items-center gap-2 px-5 py-2.5 bg-yellow-500 text-slate-900 font-bold rounded-full hover:bg-yellow-400 transition-all shadow-lg shadow-yellow-500/20 text-sm w-full md:w-auto justify-center">
+                                <button onclick="switchTab('shop')" class="flex items-center gap-2 px-5 py-2.5 bg-yellow-500 text-slate-900 font-bold rounded-full hover:bg-yellow-400 transition-all shadow-lg shadow-yellow-500/20 text-sm w-full md:w-auto justify-center">
                                     <i data-lucide="shopping-bag" size="16"></i> Visit Shop
                                 </button>
-                                <button onclick="window.initRealTime()" class="flex items-center gap-2 px-5 py-2.5 bg-slate-800 text-white font-semibold rounded-full hover:bg-slate-700 transition-all border border-slate-700 text-sm w-full md:w-auto justify-center">
+                                <button onclick="initRealTime()" class="flex items-center gap-2 px-5 py-2.5 bg-slate-800 text-white font-semibold rounded-full hover:bg-slate-700 transition-all border border-slate-700 text-sm w-full md:w-auto justify-center">
                                     <i data-lucide="refresh-cw" size="16"></i> Refresh Data
                                 </button>
                             </div>
@@ -299,28 +300,28 @@
                 <div>
                     <h3 class="font-bold text-slate-800 text-lg mb-4">Quick Tools</h3>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <button onclick="window.switchTab('scan')" class="group p-5 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:border-purple-200 transition-all text-left">
+                        <button onclick="switchTab('scan')" class="group p-5 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:border-purple-200 transition-all text-left">
                             <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                                 <i data-lucide="scan" size="24"></i>
                             </div>
                             <span class="font-bold text-slate-700 block">Scan Disease</span>
                             <span class="text-xs text-slate-400">Earn +50 Pts</span>
                         </button>
-                        <button onclick="window.switchTab('crop-guide')" class="group p-5 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:border-emerald-200 transition-all text-left">
+                        <button onclick="switchTab('crop-guide')" class="group p-5 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:border-emerald-200 transition-all text-left">
                             <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                                 <i data-lucide="book-open" size="24"></i>
                             </div>
                             <span class="font-bold text-slate-700 block">Crop Guide</span>
                             <span class="text-xs text-slate-400">Step-by-step</span>
                         </button>
-                        <button onclick="window.switchTab('shop')" class="group p-5 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:border-yellow-200 transition-all text-left">
+                        <button onclick="switchTab('shop')" class="group p-5 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:border-yellow-200 transition-all text-left">
                             <div class="w-12 h-12 rounded-xl bg-yellow-100 text-yellow-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                                 <i data-lucide="shopping-bag" size="24"></i>
                             </div>
                             <span class="font-bold text-slate-700 block">AgroShop</span>
                             <span class="text-xs text-slate-400">Use Points</span>
                         </button>
-                        <button onclick="window.switchTab('rewards')" class="group p-5 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:border-orange-200 transition-all text-left">
+                        <button onclick="switchTab('rewards')" class="group p-5 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:border-orange-200 transition-all text-left">
                             <div class="w-12 h-12 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                                 <i data-lucide="award" size="24"></i>
                             </div>
@@ -373,7 +374,7 @@
                                         <p class="text-xs text-slate-500">Identify diseases</p>
                                     </div>
                                 </div>
-                                <button onclick="window.switchTab('scan')" class="px-3 py-1.5 bg-slate-900 text-white text-xs font-bold rounded-lg hover:bg-slate-700 transition-colors">+50 Pts</button>
+                                <button onclick="switchTab('scan')" class="px-3 py-1.5 bg-slate-900 text-white text-xs font-bold rounded-lg hover:bg-slate-700 transition-colors">+50 Pts</button>
                             </div>
                             <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
                                 <div class="flex items-center gap-3">
@@ -383,7 +384,7 @@
                                         <p class="text-xs text-slate-500">Daily forecast check</p>
                                     </div>
                                 </div>
-                                <button onclick="window.initRealTime(); window.showRewardToast(); window.userPoints+=10; window.updatePointsUI();" class="px-3 py-1.5 bg-slate-900 text-white text-xs font-bold rounded-lg hover:bg-slate-700 transition-colors">+10 Pts</button>
+                                <button onclick="initRealTime(); showRewardToast(); userPoints+=10; updatePointsUI();" class="px-3 py-1.5 bg-slate-900 text-white text-xs font-bold rounded-lg hover:bg-slate-700 transition-colors">+10 Pts</button>
                             </div>
                             <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
                                 <div class="flex items-center gap-3">
@@ -393,15 +394,15 @@
                                         <p class="text-xs text-slate-500">Learn cultivation</p>
                                     </div>
                                 </div>
-                                <button onclick="window.switchTab('crop-guide')" class="px-3 py-1.5 bg-slate-900 text-white text-xs font-bold rounded-lg hover:bg-slate-700 transition-colors">+20 Pts</button>
+                                <button onclick="switchTab('crop-guide')" class="px-3 py-1.5 bg-slate-900 text-white text-xs font-bold rounded-lg hover:bg-slate-700 transition-colors">+20 Pts</button>
                             </div>
                         </div>
                     </div>
 
                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col h-full">
                         <div class="flex gap-4 border-b border-slate-100 pb-2 mb-4">
-                            <button onclick="window.toggleRewardTab('leaderboard')" id="tab-btn-leaderboard" class="text-sm font-bold text-slate-900 border-b-2 border-slate-900 pb-2">Leaderboard</button>
-                            <button onclick="window.toggleRewardTab('history')" id="tab-btn-history" class="text-sm font-bold text-slate-400 hover:text-slate-600 pb-2">History</button>
+                            <button onclick="toggleRewardTab('leaderboard')" id="tab-btn-leaderboard" class="text-sm font-bold text-slate-900 border-b-2 border-slate-900 pb-2">Leaderboard</button>
+                            <button onclick="toggleRewardTab('history')" id="tab-btn-history" class="text-sm font-bold text-slate-400 hover:text-slate-600 pb-2">History</button>
                         </div>
                         
                         <div id="tab-content-leaderboard" class="space-y-4 overflow-y-auto max-h-60 custom-scrollbar pr-1">
@@ -512,14 +513,14 @@
 
                 <div class="p-4 bg-white border-t border-slate-100">
                     <div class="flex gap-2 mb-3 overflow-x-auto no-scrollbar pb-1">
-                        <button onclick="window.setChatInput('🌧️ Will it rain today?')" class="whitespace-nowrap px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-full text-xs font-medium text-slate-600 transition-colors border border-slate-200">🌧️ Will it rain?</button>
-                        <button onclick="window.setChatInput('🍅 How to grow tomatoes?')" class="whitespace-nowrap px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-full text-xs font-medium text-slate-600 transition-colors border border-slate-200">🍅 Tomato tips</button>
-                        <button onclick="window.setChatInput('🐛 Pest control for Rice')" class="whitespace-nowrap px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-full text-xs font-medium text-slate-600 transition-colors border border-slate-200">🐛 Pest control</button>
+                        <button onclick="setChatInput('🌧️ Will it rain today?')" class="whitespace-nowrap px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-full text-xs font-medium text-slate-600 transition-colors border border-slate-200">🌧️ Will it rain?</button>
+                        <button onclick="setChatInput('🍅 How to grow tomatoes?')" class="whitespace-nowrap px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-full text-xs font-medium text-slate-600 transition-colors border border-slate-200">🍅 Tomato tips</button>
+                        <button onclick="setChatInput('🐛 Pest control for Rice')" class="whitespace-nowrap px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-full text-xs font-medium text-slate-600 transition-colors border border-slate-200">🐛 Pest control</button>
                     </div>
 
                     <div class="flex gap-2">
                         <input id="chat-input" type="text" placeholder="Type your farming question..." class="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-green-500/20 focus:border-green-500 outline-none text-slate-800 placeholder:text-slate-400">
-                        <button onclick="window.sendMessage()" class="p-3 bg-green-600 hover:bg-green-700 text-white rounded-xl transition-colors shadow-lg shadow-green-600/20">
+                        <button onclick="sendMessage()" class="p-3 bg-green-600 hover:bg-green-700 text-white rounded-xl transition-colors shadow-lg shadow-green-600/20">
                             <i data-lucide="send" size="20"></i>
                         </button>
                     </div>
@@ -542,14 +543,14 @@
                                 <h3 class="font-bold text-lg text-slate-800 mb-2">Upload or Take Photo</h3>
                                 <label class="cursor-pointer bg-slate-900 text-white px-8 py-3.5 rounded-full font-medium hover:bg-slate-800 transition-colors inline-flex items-center gap-2 shadow-lg shadow-slate-900/20">
                                     <i data-lucide="upload-cloud" size="18"></i> Select Image
-                                    <input type="file" class="hidden" accept="image/*" onchange="window.handleImageUpload(event)">
+                                    <input type="file" class="hidden" accept="image/*" onchange="handleImageUpload(event)">
                                 </label>
                             </div>
                         </div>
                         <div id="image-preview" class="hidden relative h-full flex flex-col">
                             <img id="preview-img" src="" alt="Preview" class="w-full h-64 object-cover rounded-xl shadow-md mb-6 border border-slate-100">
-                            <button onclick="window.startDiagnosis()" id="diagnose-btn" class="w-full bg-green-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-green-700 transition-colors shadow-lg shadow-green-600/20">Analyze & Earn Points</button>
-                            <button onclick="window.resetScan()" class="absolute top-2 right-2 p-2 bg-slate-900/50 backdrop-blur-md text-white rounded-full hover:bg-slate-900/70 transition-colors"><i data-lucide="x" size="16"></i></button>
+                            <button onclick="startDiagnosis()" id="diagnose-btn" class="w-full bg-green-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-green-700 transition-colors shadow-lg shadow-green-600/20">Analyze & Earn Points</button>
+                            <button onclick="resetScan()" class="absolute top-2 right-2 p-2 bg-slate-900/50 backdrop-blur-md text-white rounded-full hover:bg-slate-900/70 transition-colors"><i data-lucide="x" size="16"></i></button>
                         </div>
                         <div id="scan-loading" class="hidden absolute inset-0 bg-white/95 flex flex-col items-center justify-center z-10">
                             <div class="w-16 h-16 border-4 border-slate-100 border-t-green-500 rounded-full animate-spin mb-4"></div>
@@ -595,7 +596,7 @@
                     <p class="text-slate-500">Professional guides from sowing to harvest.</p>
                 </div>
                 <div id="crop-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div onclick="window.showCropDetail('rice')" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all group">
+                    <div onclick="showCropDetail('rice')" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all group">
                         <div class="h-48 overflow-hidden relative">
                              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
                             <img src="https://images.unsplash.com/photo-1536617621972-0604420b7274?auto=format&fit=crop&q=80&w=400&h=300" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
@@ -609,7 +610,7 @@
                             <span class="text-green-600 font-bold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">Read Guide <i data-lucide="arrow-right" size="16"></i></span>
                         </div>
                     </div>
-                    <div onclick="window.showCropDetail('tomato')" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all group">
+                    <div onclick="showCropDetail('tomato')" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all group">
                          <div class="h-48 overflow-hidden relative">
                              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
                             <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&q=80&w=400&h=300" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
@@ -627,7 +628,7 @@
 
                 <div id="crop-detail" class="hidden flex-1 bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden flex flex-col md:flex-row">
                     <div class="w-full md:w-1/3 bg-slate-50 border-r border-slate-200 p-8">
-                        <button onclick="window.hideCropDetail()" class="mb-8 flex items-center gap-2 text-slate-500 hover:text-slate-900 font-medium transition-colors"><i data-lucide="arrow-left" size="18"></i> Back to Crops</button>
+                        <button onclick="hideCropDetail()" class="mb-8 flex items-center gap-2 text-slate-500 hover:text-slate-900 font-medium transition-colors"><i data-lucide="arrow-left" size="18"></i> Back to Crops</button>
                         <h2 id="detail-title" class="text-3xl font-bold text-slate-900 mb-2">Rice</h2>
                         <div class="inline-block px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-bold mb-6">Cereal Crop</div>
                         
@@ -683,7 +684,7 @@
                                     <input type="number" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3.5 outline-none focus:ring-2 focus:ring-green-500/20 font-medium" value="30">
                                 </div>
                             </div>
-                            <button onclick="window.showSoilReport()" class="w-full bg-slate-900 text-white py-4 rounded-xl font-bold hover:bg-slate-800 transition-colors shadow-lg shadow-slate-900/10 mt-2">Generate Report</button>
+                            <button onclick="showSoilReport()" class="w-full bg-slate-900 text-white py-4 rounded-xl font-bold hover:bg-slate-800 transition-colors shadow-lg shadow-slate-900/10 mt-2">Generate Report</button>
                         </div>
                     </div>
                     <div class="md:col-span-7">
@@ -777,7 +778,7 @@
                             <i data-lucide="chevron-down" class="absolute right-4 top-4 text-slate-400 pointer-events-none" size="20"></i>
                         </div>
                     </div>
-                    <button onclick="window.calculateRec()" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/20 text-lg">Analyze & Recommend</button>
+                    <button onclick="calculateRec()" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/20 text-lg">Analyze & Recommend</button>
                 </div>
                 
                 <div id="rec-loading" class="hidden py-12 text-center">
@@ -812,117 +813,32 @@
                             <div class="text-xs text-slate-400 font-medium uppercase">Est. Profit/Acre</div>
                         </div>
                     </div>
-                    <button onclick="window.resetRec()" class="w-full py-4 text-slate-500 font-medium hover:text-slate-900 transition-colors mt-4">Start New Analysis</button>
+                    <button onclick="resetRec()" class="w-full py-4 text-slate-500 font-medium hover:text-slate-900 transition-colors mt-4">Start New Analysis</button>
                 </div>
              </div>
 
         </main>
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-        // IMPORTANT: REPLACE THIS OBJECT WITH YOUR ACTUAL FIREBASE KEYS
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_ID",
-            appId: "YOUR_APP_ID"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-
-        // --- AUTHENTICATION LOGIC ---
-        onAuthStateChanged(auth, (user) => {
-            if (!user) {
-                // Kick unauthorized users back to login
-                window.location.href = "index.html";
-            } else {
-                // User is authenticated, update the UI with their info
-                if (user.displayName) {
-                    // Update Sidebar Name
-                    document.getElementById('sidebar-name').innerText = user.displayName;
-                    
-                    // Create Initials for Avatar (e.g., John Doe -> JD)
-                    const nameParts = user.displayName.split(' ');
-                    let initials = nameParts[0].charAt(0).toUpperCase();
-                    if (nameParts.length > 1) {
-                        initials += nameParts[nameParts.length - 1].charAt(0).toUpperCase();
-                    }
-                    document.getElementById('sidebar-initials').innerText = initials;
-                    document.getElementById('lb-initials').innerText = initials;
-                } else {
-                    document.getElementById('sidebar-name').innerText = "AgroPath Farmer";
-                    document.getElementById('sidebar-initials').innerText = "AF";
-                }
-            }
-        });
-
-        // Expose Logout function to global scope
-        window.logoutUser = function() {
-            signOut(auth).then(() => {
-                // The observer above will handle the redirect
-            }).catch((error) => {
-                alert("Error logging out: " + error.message);
-            });
-        };
-
-        // --- BROWSER BACK BUTTON FIX ---
-        // Push an initial state so the back button doesn't leave the page immediately
-        history.pushState({ view: 'dashboard' }, null, '');
-
-        window.addEventListener('popstate', function(event) {
-            // When the back button is pressed, always return to the dashboard view
-            // instead of exiting the app/logging out
-            window.switchTab('dashboard');
-            // Re-push the state so they can't go back further
-            history.pushState({ view: 'dashboard' }, null, '');
-        });
-
-        // Make functions globally accessible so HTML onclick handlers can reach them
-        window.initRealTime = initRealTime;
-        window.switchTab = switchTab;
-        window.selectExperience = selectExperience;
-        window.toggleMobileMenu = toggleMobileMenu;
-        window.setChatInput = setChatInput;
-        window.sendMessage = sendMessage;
-        window.handleImageUpload = handleImageUpload;
-        window.startDiagnosis = startDiagnosis;
-        window.resetScan = resetScan;
-        window.showCropDetail = showCropDetail;
-        window.hideCropDetail = hideCropDetail;
-        window.showSoilReport = showSoilReport;
-        window.calculateRec = calculateRec;
-        window.resetRec = resetRec;
-        window.toggleDiscount = toggleDiscount;
-        window.buyProduct = buyProduct;
-        window.toggleRewardTab = toggleRewardTab;
-        window.updatePointsUI = updatePointsUI;
-
+    <script>
         // Initialize Icons
         lucide.createIcons();
 
         // --- State Variables ---
-        window.userPoints = 120; // Default points
-        window.userLevel = 1;
+        let userPoints = 120; // Default points
+        let userLevel = 1;
         const pointsPerLevel = 200;
 
         // --- Onboarding Logic ---
         function selectExperience(level) {
             const overlay = document.getElementById('onboarding-overlay');
-            if(overlay) {
-                overlay.classList.add('opacity-0', 'pointer-events-none');
-                setTimeout(() => overlay.remove(), 500); 
-            }
+            overlay.classList.add('opacity-0', 'pointer-events-none');
+            setTimeout(() => overlay.remove(), 500); 
 
             if (level === 'beginner') {
-                window.switchTab('crop-guide');
+                switchTab('crop-guide');
             } else {
-                window.switchTab('dashboard');
+                switchTab('dashboard');
             }
             
             initRealTime();
@@ -935,7 +851,7 @@
             const els = [document.getElementById('user-points'), document.getElementById('banner-points'), document.getElementById('shop-points'), document.getElementById('lb-points'), document.getElementById('points-progress-text')];
             els.forEach(el => {
                 if(el) {
-                    el.innerText = window.userPoints;
+                    el.innerText = userPoints;
                     el.classList.add('animate-pop');
                     setTimeout(() => el.classList.remove('animate-pop'), 300);
                 }
@@ -943,9 +859,8 @@
             updateTreeProgress();
         }
 
-        window.showRewardToast = function(msg) {
+        function showRewardToast(msg) {
             const toast = document.getElementById('reward-toast');
-            if(!toast) return;
             if(msg) toast.querySelector('h4').innerText = msg;
             toast.classList.remove('translate-x-[150%]');
             setTimeout(() => {
@@ -968,529 +883,4 @@
                 lbContent.classList.add('hidden');
                 histContent.classList.remove('hidden');
                 histBtn.className = "text-sm font-bold text-slate-900 border-b-2 border-slate-900 pb-2";
-                lbBtn.className = "text-sm font-bold text-slate-400 hover:text-slate-600 pb-2";
-            }
-        }
-
-        function updateTreeProgress() {
-            const progress = (window.userPoints % pointsPerLevel) / pointsPerLevel * 100;
-            const bar = document.getElementById('points-progress-bar');
-            if(bar) bar.style.width = `${progress}%`;
-
-            const newLevel = Math.floor(window.userPoints / pointsPerLevel) + 1;
-            if(newLevel > window.userLevel) {
-                window.userLevel = newLevel;
-                document.getElementById('level-display').innerText = window.userLevel;
-                document.getElementById('tree-level-display').innerText = window.userLevel;
-                document.getElementById('sidebar-level').innerText = window.userLevel;
-                
-                const treeIcon = document.getElementById('tree-icon');
-                if(window.userLevel >= 2) {
-                    treeIcon.setAttribute('data-lucide', 'tree-deciduous'); 
-                    lucide.createIcons();
-                }
-                
-                alert(`🎉 Level Up! You reached Level ${window.userLevel}. Bonus +50 Points!`);
-                window.userPoints += 50;
-                updatePointsUI();
-            }
-        }
-
-        function renderRewards() {
-            updateTreeProgress();
-        }
-
-        // --- Real-time Logic ---
-        async function initRealTime() {
-            const weatherContent = document.getElementById('weather-content');
-            const weatherSkeleton = document.getElementById('weather-skeleton');
-            
-            if (weatherContent && weatherSkeleton) {
-                weatherContent.classList.add('hidden');
-                weatherSkeleton.classList.remove('hidden');
-            }
-            
-            const locText = document.getElementById('header-location-text');
-            if(locText) locText.innerText = "Locating...";
-
-            updateTimeGreeting();
-
-            if ("geolocation" in navigator) {
-                navigator.geolocation.getCurrentPosition(async (position) => {
-                    const lat = position.coords.latitude;
-                    const lon = position.coords.longitude;
-                    
-                    const googleUrl = `https://www.google.com/search?q=weather+at+${lat},${lon}`;
-                    const linkBtn = document.getElementById('google-weather-btn');
-                    if(linkBtn) {
-                        linkBtn.href = googleUrl;
-                        linkBtn.classList.remove('hidden');
-                    }
-
-                    try {
-                        const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`);
-                        if(!geoRes.ok) throw new Error('Geo failed');
-                        const geoData = await geoRes.json();
-                        const city = geoData.address.city || geoData.address.town || geoData.address.village || "Local Farm";
-                        const region = geoData.address.state || "";
-                        updateLocationText(`${city}, ${region}`);
-
-                        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto`;
-                        const weatherRes = await fetch(url);
-                        if(!weatherRes.ok) throw new Error('Weather failed');
-                        const weatherData = await weatherRes.json();
-                        
-                        updateWeatherUI(weatherData.current);
-                        updateAlertsUI(weatherData.current);
-                        updateForecastUI(weatherData.daily);
-                        
-                        if (weatherSkeleton) weatherSkeleton.classList.add('hidden');
-                        if (weatherContent) weatherContent.classList.remove('hidden');
-                        
-                    } catch (e) {
-                        console.error("API Error", e);
-                        useFallbackData(); 
-                    }
-
-                }, (error) => {
-                    console.warn("Loc permission denied/error");
-                    useFallbackData();
-                });
-            } else {
-                useFallbackData();
-            }
-        }
-
-        function useFallbackData() {
-            updateLocationText("Demo Farm (Preview)");
-            const mockCurrent = { temperature_2m: 28, relative_humidity_2m: 65, wind_speed_10m: 12, weather_code: 1 };
-            const mockDaily = {
-                time: Array.from({length: 7}, (_, i) => new Date(Date.now() + i*86400000).toISOString()),
-                temperature_2m_max: [30, 31, 29, 28, 30, 32, 31],
-                temperature_2m_min: [22, 23, 21, 20, 22, 23, 22],
-                weather_code: [1, 2, 53, 61, 1, 0, 2],
-                precipitation_probability_max: [10, 20, 60, 80, 10, 0, 5]
-            };
-            
-            updateWeatherUI(mockCurrent);
-            updateAlertsUI(mockCurrent);
-            updateForecastUI(mockDaily);
-            
-            const weatherContent = document.getElementById('weather-content');
-            const weatherSkeleton = document.getElementById('weather-skeleton');
-            if (weatherSkeleton) weatherSkeleton.classList.add('hidden');
-            if (weatherContent) weatherContent.classList.remove('hidden');
-        }
-
-        function updateLocationText(text) {
-            const el1 = document.getElementById('header-location-text');
-            const el2 = document.getElementById('weather-tab-location');
-            if(el1) el1.innerText = text;
-            if(el2) el2.innerText = text;
-        }
-
-        function updateTimeGreeting() {
-            const hour = new Date().getHours();
-            const greeting = hour < 12 ? "Good Morning" : hour < 18 ? "Good Afternoon" : "Good Evening";
-            const el = document.getElementById('dashboard-greeting');
-            if(el) el.innerText = `${greeting}, Farmer! 🌾`;
-        }
-
-        function updateWeatherUI(data) {
-            const temp = Math.round(data.temperature_2m);
-            const humidity = data.relative_humidity_2m;
-            const wind = data.wind_speed_10m;
-            const code = data.weather_code;
-            
-            const conditions = {
-                0: 'Clear Sky', 1: 'Mainly Clear', 2: 'Partly Cloudy', 3: 'Overcast',
-                45: 'Foggy', 48: 'Fog', 51: 'Drizzle', 53: 'Drizzle', 55: 'Heavy Drizzle',
-                61: 'Light Rain', 63: 'Rain', 65: 'Heavy Rain', 71: 'Snow', 95: 'Thunderstorm'
-            };
-            const conditionText = conditions[code] || 'Cloudy';
-
-            const dashTemp = document.getElementById('dash-temp');
-            if(dashTemp) dashTemp.innerText = `${temp}°C`;
-            const dashHum = document.getElementById('dash-humidity');
-            if(dashHum) dashHum.innerText = `${humidity}%`;
-            const dashWind = document.getElementById('dash-wind');
-            if(dashWind) dashWind.innerHTML = `${wind} <span class="text-xs text-slate-400">km/h</span>`;
-            
-            const tabTemp = document.getElementById('tab-weather-temp');
-            if(tabTemp) tabTemp.innerText = `${temp}°`;
-            const tabCond = document.getElementById('tab-weather-condition');
-            if(tabCond) tabCond.innerText = conditionText;
-
-            const advisoryList = document.getElementById('farm-advisory-list');
-            if(advisoryList) {
-                let advisoryHTML = '';
-                if(code >= 51 && code <= 67) { 
-                    advisoryHTML += `<li class="flex items-center gap-3 text-amber-200"><i data-lucide="cloud-rain" size="18"></i> Avoid pesticide spraying today.</li>`;
-                    advisoryHTML += `<li class="flex items-center gap-3 text-white"><i data-lucide="check-circle" size="18"></i> Ensure drainage channels are open.</li>`;
-                } else if (code <= 2) { 
-                    advisoryHTML += `<li class="flex items-center gap-3 text-green-200"><i data-lucide="sun" size="18"></i> Good day for harvesting.</li>`;
-                    advisoryHTML += `<li class="flex items-center gap-3 text-white"><i data-lucide="droplets" size="18"></i> Irrigate crops in the evening.</li>`;
-                } else {
-                    advisoryHTML += `<li class="flex items-center gap-3 text-white"><i data-lucide="activity" size="18"></i> Routine maintenance recommended.</li>`;
-                }
-                advisoryList.innerHTML = advisoryHTML;
-                lucide.createIcons();
-            }
-        }
-
-        function updateAlertsUI(current) {
-            const container = document.getElementById('dashboard-alerts-list');
-            if(!container) return;
-            
-            let alertsHTML = '';
-            let count = 0;
-
-            const addAlert = (icon, color, text, subtext) => {
-                count++;
-                return `
-                <div class="p-3 bg-${color}-50 border border-${color}-100 rounded-xl flex gap-3 items-start hover:bg-${color}-100 transition-colors">
-                    <i data-lucide="${icon}" class="text-${color}-600 shrink-0 mt-0.5" size="18"></i>
-                    <div>
-                        <p class="text-sm text-${color}-900 font-bold leading-tight">${text}</p>
-                        <p class="text-xs text-${color}-600 mt-0.5 font-medium">${subtext}</p>
-                    </div>
-                </div>`;
-            };
-
-            if (current.weather_code >= 51) alertsHTML += addAlert('cloud-rain', 'red', 'Rain Alert', 'Stop irrigation immediately.');
-            if (current.wind_speed_10m > 15) alertsHTML += addAlert('wind', 'amber', 'High Winds', 'Secure tall crops.');
-            if (current.relative_humidity_2m > 85) alertsHTML += addAlert('alert-triangle', 'red', 'Fungal Risk', 'Humidity > 85%. Check for blight.');
-            if (current.temperature_2m > 35) alertsHTML += addAlert('sun', 'orange', 'Heat Stress', 'Increase water supply.');
-            
-            alertsHTML += addAlert('trending-up', 'green', 'Market Update', 'Potato prices up 12%.');
-
-            container.innerHTML = alertsHTML;
-            lucide.createIcons();
-        }
-
-        function updateForecastUI(daily) {
-            const container = document.getElementById('forecast-grid');
-            if(!container) return;
-
-            let html = '';
-            
-            for(let i=0; i<7; i++) {
-                const date = new Date(daily.time[i]);
-                const dayName = i === 0 ? 'Today' : date.toLocaleDateString('en-US', { weekday: 'short' });
-                const maxT = Math.round(daily.temperature_2m_max[i]);
-                const minT = Math.round(daily.temperature_2m_min[i]);
-                const code = daily.weather_code[i];
-
-                let iconName = 'cloud';
-                let colorClass = 'text-slate-400';
-                
-                if(code <= 1) { iconName = 'sun'; colorClass = 'text-amber-500'; }
-                else if(code >= 51) { iconName = 'cloud-rain'; colorClass = 'text-blue-500'; }
-
-                html += `
-                <div class="bg-white p-4 rounded-2xl border border-slate-100 text-center shadow-sm hover:shadow-md transition-all">
-                    <p class="text-slate-400 text-[10px] uppercase font-bold mb-2 tracking-wider">${dayName}</p>
-                    <div class="h-8 flex items-center justify-center mb-2">
-                        <i data-lucide="${iconName}" class="${colorClass}" size="24"></i>
-                    </div>
-                    <div class="flex justify-center gap-1 text-sm font-bold text-slate-800">
-                        <span>${maxT}°</span><span class="text-slate-300">/</span><span class="text-slate-400">${minT}°</span>
-                    </div>
-                </div>`;
-            }
-            container.innerHTML = html;
-            lucide.createIcons();
-        }
-
-        // --- Marketplace Logic ---
-        const products = [
-            { id: 1, name: "Hybrid Tomato Seeds", price: 40, category: "Seeds", image: "https://images.unsplash.com/photo-1592878904946-b3cd8ae243d9?auto=format&fit=crop&q=80&w=200&h=200" },
-            { id: 2, name: "Organic NPK Fertilizer", price: 250, category: "Fertilizer", image: "https://images.unsplash.com/photo-1628352081506-83c43123ed6d?auto=format&fit=crop&q=80&w=200&h=200" },
-            { id: 3, name: "Steel Hand Trowel", price: 150, category: "Tools", image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&q=80&w=200&h=200" },
-            { id: 4, name: "Neem Oil Spray", price: 180, category: "Fertilizer", image: "https://images.unsplash.com/photo-1599421490111-ad70bebb536f?auto=format&fit=crop&q=80&w=200&h=200" },
-            { id: 5, name: "Ceramic Pot (Large)", price: 200, category: "Pots", image: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&q=80&w=200&h=200" },
-            { id: 6, name: "Spinach Seeds", price: 30, category: "Seeds", image: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&q=80&w=200&h=200" },
-            { id: 7, name: "Watering Can", price: 350, category: "Tools", image: "https://images.unsplash.com/photo-1599687351724-dfa3c4ff81b1?auto=format&fit=crop&q=80&w=200&h=200" },
-            { id: 8, name: "Grow Bags (Set of 5)", price: 400, category: "Pots", image: "https://images.unsplash.com/photo-1616788494707-ec28f08d05a1?auto=format&fit=crop&q=80&w=200&h=200" },
-        ];
-
-        function renderMarketplace() {
-            const grid = document.getElementById('shop-grid');
-            if(!grid) return;
-            
-            grid.innerHTML = products.map(p => `
-                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden group hover:shadow-lg transition-all">
-                    <div class="h-40 overflow-hidden bg-slate-100 relative">
-                        <img src="${p.image}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <span class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg text-xs font-bold text-slate-600 shadow-sm">${p.category}</span>
-                    </div>
-                    <div class="p-5">
-                        <h4 class="font-bold text-slate-900 mb-1 truncate">${p.name}</h4>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-lg font-bold text-green-700">₹${p.price}</span>
-                            <span class="text-xs text-slate-400 line-through decoration-red-400 decoration-2" id="old-price-${p.id}"></span>
-                        </div>
-                        
-                        <div class="flex items-center justify-between">
-                            <label class="inline-flex items-center cursor-pointer">
-                                <input type="checkbox" class="peer sr-only" onchange="window.toggleDiscount(this, ${p.id}, ${p.price})">
-                                <div class="relative w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-yellow-400"></div>
-                                <span class="ms-2 text-xs font-medium text-slate-500">Use Points</span>
-                            </label>
-                            <button onclick="window.buyProduct('${p.name}')" class="bg-slate-900 text-white p-2 rounded-lg hover:bg-slate-800 transition-colors">
-                                <i data-lucide="shopping-cart" size="18"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-            lucide.createIcons();
-        }
-
-        function toggleDiscount(checkbox, id, price) {
-            const oldPriceEl = document.getElementById(`old-price-${id}`);
-            const cardPrice = checkbox.closest('.p-5').querySelector('.text-green-700');
-            
-            if(checkbox.checked) {
-                if(window.userPoints >= 50) {
-                    oldPriceEl.innerText = `₹${price}`;
-                    const discount = Math.round(price * 0.8); 
-                    cardPrice.innerText = `₹${discount}`;
-                } else {
-                    checkbox.checked = false;
-                    alert("Not enough AgroPoints! Scan your farm to earn more.");
-                }
-            } else {
-                oldPriceEl.innerText = '';
-                cardPrice.innerText = `₹${price}`;
-            }
-        }
-
-        function buyProduct(name) {
-            alert(`Added ${name} to cart!`);
-        }
-
-        // --- Tab Switching Logic ---
-        function switchTab(tabId) {
-            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('fade-in'));
-            
-            const selectedView = document.getElementById('view-' + tabId);
-            if(selectedView) {
-                selectedView.classList.remove('hidden');
-                void selectedView.offsetWidth; 
-                selectedView.classList.add('fade-in');
-            }
-
-            document.querySelectorAll('.nav-item').forEach(el => {
-                if(el.dataset.tab === tabId) {
-                    el.className = 'nav-item w-full flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all font-semibold bg-green-50 text-green-700 ring-1 ring-green-600/10 shadow-sm';
-                } else {
-                    el.className = 'nav-item w-full flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900';
-                }
-            });
-
-            const titles = {
-                'dashboard': 'Dashboard', 'ai-chat': 'AI Assistant', 'scan': 'Disease Detection', 'shop': 'AgroShop',
-                'crop-guide': 'Crop Guide', 'soil': 'Soil Lab', 'weather': 'Weather', 'recommend': 'Smart Pick', 'rewards': 'Rewards Zone'
-            };
-            const titleEl = document.getElementById('header-title');
-            if(titleEl) titleEl.innerText = titles[tabId];
-
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('mobile-overlay');
-            if (sidebar && !sidebar.classList.contains('-translate-x-full')) {
-                sidebar.classList.add('-translate-x-full');
-                sidebar.classList.remove('translate-x-0');
-                if(overlay) overlay.classList.add('hidden');
-            }
-        }
-
-        function toggleMobileMenu() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('mobile-overlay');
-            
-            if(!sidebar || !overlay) return;
-
-            const isClosed = sidebar.classList.contains('-translate-x-full');
-
-            if (isClosed) {
-                sidebar.classList.remove('-translate-x-full');
-                sidebar.classList.add('translate-x-0');
-                overlay.classList.remove('hidden');
-            } else {
-                sidebar.classList.add('-translate-x-full');
-                sidebar.classList.remove('translate-x-0');
-                overlay.classList.add('hidden');
-            }
-        }
-
-        // --- AI Chat Logic ---
-        function setChatInput(text) {
-            const input = document.getElementById('chat-input');
-            if(input) {
-                input.value = text;
-                window.sendMessage();
-            }
-        }
-
-        function sendMessage() {
-            const input = document.getElementById('chat-input');
-            if(!input) return;
-            const text = input.value.trim();
-            if (!text) return;
-
-            const container = document.getElementById('chat-messages');
-            
-            const userHTML = `
-                <div class="flex justify-end fade-in">
-                    <div class="max-w-[85%] md:max-w-[70%] rounded-2xl p-4 shadow-sm bg-green-600 text-white rounded-tr-none">
-                        <p class="text-sm leading-relaxed">${text}</p>
-                    </div>
-                </div>`;
-            container.insertAdjacentHTML('beforeend', userHTML);
-            input.value = '';
-            container.scrollTop = container.scrollHeight;
-
-            setTimeout(() => {
-                let reply = "Based on agricultural best practices, ensure you monitor soil moisture regularly.";
-                if(text.toLowerCase().includes('rain')) reply = "Current forecasts show a high chance of rain. I recommend pausing any scheduled irrigation for 24 hours.";
-                if(text.toLowerCase().includes('tomato')) reply = "Tomatoes need consistent watering to prevent blossom end rot. Support them with stakes as they grow.";
-                if(text.toLowerCase().includes('pest')) reply = "For pests, first identify if it's an insect or fungus. Try our 'Disease Scan' feature for an instant diagnosis!";
-
-                const botHTML = `
-                <div class="flex justify-start fade-in">
-                    <div class="max-w-[85%] md:max-w-[70%] rounded-2xl p-4 shadow-sm bg-white text-slate-700 border border-slate-100 rounded-tl-none">
-                        <p class="text-sm leading-relaxed">${reply}</p>
-                    </div>
-                </div>`;
-                container.insertAdjacentHTML('beforeend', botHTML);
-                container.scrollTop = container.scrollHeight;
-            }, 800);
-        }
-        
-        const chatInput = document.getElementById('chat-input');
-        if(chatInput) {
-            chatInput.addEventListener('keypress', function (e) {
-                if (e.key === 'Enter') window.sendMessage();
-            });
-        }
-
-        // --- Disease Scan Logic ---
-        function handleImageUpload(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('preview-img').src = e.target.result;
-                    document.getElementById('upload-placeholder').classList.add('hidden');
-                    document.getElementById('image-preview').classList.remove('hidden');
-                    document.getElementById('scan-result').classList.add('hidden');
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function startDiagnosis() {
-            const btn = document.getElementById('diagnose-btn');
-            const loading = document.getElementById('scan-loading');
-            
-            if(btn) btn.disabled = true;
-            if(loading) loading.classList.remove('hidden');
-
-            setTimeout(() => {
-                if(loading) loading.classList.add('hidden');
-                const res = document.getElementById('scan-result');
-                if(res) res.classList.remove('hidden');
-                if(btn) btn.disabled = false;
-                
-                window.userPoints += 50;
-                updatePointsUI();
-                window.showRewardToast("+50 AgroPoints!");
-                
-                lucide.createIcons();
-            }, 2000);
-        }
-
-        function resetScan() {
-            const prev = document.getElementById('image-preview');
-            const place = document.getElementById('upload-placeholder');
-            const res = document.getElementById('scan-result');
-            
-            if(prev) prev.classList.add('hidden');
-            if(place) place.classList.remove('hidden');
-            if(res) res.classList.add('hidden');
-            
-            const fileInput = document.querySelector('input[type="file"]');
-            if(fileInput) fileInput.value = '';
-        }
-
-        // --- Crop Guide Logic ---
-        const cropData = {
-            rice: { 
-                title: 'Rice (Paddy)', 
-                stages: [
-                    { t: 'Nursery Prep', d: 'Prepare a wet bed nursery. Soak seeds for 24h before sowing.' },
-                    { t: 'Transplanting', d: 'Transplant 21-25 day old seedlings. Maintain 2cm water level.' },
-                    { t: 'Nutrient Mgmt', d: 'Apply Nitrogen in splits. Monitor for stem borer.' },
-                    { t: 'Harvesting', d: 'Harvest when 80% grains are golden. Dry to 14% moisture.' }
-                ]
-            },
-            tomato: {
-                title: 'Tomato',
-                stages: [
-                    { t: 'Sowing', d: 'Sow in pro-trays with cocopeat. Germination takes 6-8 days.' },
-                    { t: 'Transplanting', d: 'Transplant 25-day old seedlings in raised beds.' },
-                    { t: 'Staking', d: 'Provide support using stakes or trellis to keep fruits off ground.' },
-                    { t: 'Harvest', d: 'Pick fruits at the breaker stage for distant markets.' }
-                ]
-            }
-        };
-
-        function showCropDetail(cropId) {
-            const crop = cropData[cropId];
-            document.getElementById('crop-list').classList.add('hidden');
-            document.getElementById('crop-detail').classList.remove('hidden');
-            document.getElementById('detail-title').innerText = crop.title;
-            
-            const stagesContainer = document.getElementById('detail-stages');
-            stagesContainer.innerHTML = crop.stages.map((s, i) => `
-                <div class="relative pl-8 fade-in" style="animation-delay: ${i*100}ms">
-                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-green-500 border-4 border-slate-50 shadow-sm z-10"></div>
-                    <div class="group">
-                        <h4 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-green-600 transition-colors">Stage ${i+1}: ${s.t}</h4>
-                        <p class="text-slate-500 text-sm leading-relaxed">${s.d}</p>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function hideCropDetail() {
-            document.getElementById('crop-detail').classList.add('hidden');
-            document.getElementById('crop-list').classList.remove('hidden');
-        }
-
-        // --- Soil Lab Logic ---
-        function showSoilReport() {
-            document.getElementById('soil-placeholder').classList.add('hidden');
-            document.getElementById('soil-report').classList.remove('hidden');
-        }
-
-        // --- Recommendation Logic ---
-        function calculateRec() {
-            document.getElementById('rec-form').classList.add('hidden');
-            document.getElementById('rec-loading').classList.remove('hidden');
-            setTimeout(() => {
-                document.getElementById('rec-loading').classList.add('hidden');
-                document.getElementById('rec-result').classList.remove('hidden');
-            }, 1500);
-        }
-
-        function resetRec() {
-            document.getElementById('rec-result').classList.add('hidden');
-            document.getElementById('rec-form').classList.remove('hidden');
-        }
-
-    </script>
-</body>
-</html>
+                lbBtn.className = "text-sm font-bold text-slate-400 hover:text-slate-
