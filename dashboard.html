@@ -12,20 +12,26 @@
         .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 12px; transition: 0.2s; color: #64748b; font-weight: 500; text-decoration: none; }
         .nav-item:hover { background: #f1f5f9; color: #0f172a; }
         .nav-item.active { background: #f0fdf4; color: #15803d; font-weight: 600; box-shadow: inset 0 0 0 1px rgba(22, 163, 74, 0.1); }
+        .custom-scrollbar::-webkit-scrollbar { display: none; } /* Hide scrollbar for cleaner mobile look */
     </style>
 </head>
 <body class="text-slate-900 h-screen flex overflow-hidden">
 
-    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col hidden md:flex">
-        <div class="p-6 border-b border-slate-100 flex items-center gap-3">
-            <div class="bg-green-600 p-2 rounded-xl"><i data-lucide="leaf" class="w-5 h-5 text-white"></i></div>
-            <div>
-                <h1 class="text-lg font-bold tracking-tight">AGROPATH</h1>
-                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-wide">Smart Farming</p>
+    <div id="mobile-overlay" onclick="toggleMobileMenu()" class="fixed inset-0 bg-slate-900/60 z-40 hidden backdrop-blur-sm md:hidden transition-opacity"></div>
+
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-200 flex flex-col transform -translate-x-full transition-transform duration-300 ease-in-out md:relative md:translate-x-0 shadow-2xl md:shadow-none">
+        <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-green-600 p-2 rounded-xl"><i data-lucide="leaf" class="w-5 h-5 text-white"></i></div>
+                <div>
+                    <h1 class="text-lg font-bold tracking-tight">AGROPATH</h1>
+                    <p class="text-[10px] text-slate-500 font-bold uppercase tracking-wide">Smart Farming</p>
+                </div>
             </div>
+            <button onclick="toggleMobileMenu()" class="md:hidden p-1 text-slate-400 hover:text-slate-600"><i data-lucide="x" size="20"></i></button>
         </div>
 
-        <nav class="p-4 space-y-1.5 flex-1 overflow-y-auto">
+        <nav class="p-4 space-y-1.5 flex-1 overflow-y-auto custom-scrollbar">
             <a href="dashboard.html" class="nav-item active"><i data-lucide="layout-dashboard" size="18"></i> Dashboard</a>
             <a href="profile.html" class="nav-item"><i data-lucide="user" size="18"></i> Profile Settings</a>
             <a href="rewards.html" class="nav-item"><i data-lucide="award" size="18"></i> Rewards Zone</a>
@@ -49,90 +55,137 @@
         </div>
     </aside>
 
-    <div class="flex-1 flex flex-col h-full relative w-full">
-        <header class="bg-white/80 backdrop-blur-md sticky top-0 z-30 border-b border-slate-200 px-8 py-4 flex items-center justify-between shadow-sm">
-            <h2 class="text-xl font-bold text-slate-800">Dashboard Overview</h2>
-            <div class="flex items-center gap-4">
-                <div class="text-right">
-                    <p class="text-sm font-bold text-slate-700 flex items-center gap-1"><i data-lucide="map-pin" size="14" class="text-green-600"></i> <span id="loc-text">Locating...</span></p>
+    <div class="flex-1 flex flex-col h-full relative w-full overflow-hidden">
+        <header class="bg-white/80 backdrop-blur-md sticky top-0 z-30 border-b border-slate-200 px-4 md:px-8 py-4 flex items-center justify-between shadow-sm">
+            <div class="flex items-center gap-3">
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 -ml-2 text-slate-600 hover:bg-slate-100 rounded-xl">
+                    <i data-lucide="menu" size="24"></i>
+                </button>
+                <h2 class="text-lg md:text-xl font-bold text-slate-800">Dashboard</h2>
+            </div>
+            
+            <div class="flex items-center gap-3 md:gap-4">
+                <div class="text-right hidden sm:block">
+                    <p class="text-xs md:text-sm font-bold text-slate-700 flex items-center gap-1">
+                        <i data-lucide="map-pin" size="14" class="text-green-600"></i> <span id="loc-text">Locating...</span>
+                    </p>
                 </div>
-                <button onclick="logoutUser()" class="flex items-center gap-2 px-3 py-1.5 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition-colors border border-red-100 text-sm font-bold">
+                <button onclick="logoutUser()" class="hidden md:flex items-center gap-2 px-3 py-1.5 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition-colors border border-red-100 text-sm font-bold">
                     <i data-lucide="log-out" size="16"></i> Logout
+                </button>
+                <button onclick="logoutUser()" class="md:hidden p-2 text-red-500 hover:bg-red-50 rounded-full">
+                    <i data-lucide="log-out" size="20"></i>
                 </button>
             </div>
         </header>
 
-        <main class="flex-1 overflow-y-auto p-8">
-            <div class="bg-slate-900 rounded-3xl p-8 text-white shadow-xl mb-6">
-                <h1 id="greeting" class="text-3xl font-bold mb-2">Welcome Back! 🌾</h1>
-                <p class="text-slate-300">Here is your farm's summary for today.</p>
+        <main class="flex-1 overflow-y-auto p-4 md:p-8">
+            <div class="bg-slate-900 rounded-3xl p-6 md:p-8 text-white shadow-xl mb-6 relative overflow-hidden">
+                <div class="relative z-10">
+                    <h1 id="greeting" class="text-2xl md:text-3xl font-bold mb-2">Welcome Back! 🌾</h1>
+                    <p class="text-slate-300 text-sm md:text-base">Here is your farm's summary for today.</p>
+                </div>
+                <i data-lucide="sprout" class="absolute right-0 bottom-0 w-32 h-32 opacity-10 -mb-4 -mr-4 transform rotate-12"></i>
             </div>
 
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 max-w-3xl">
-                <h3 class="font-bold text-slate-800 flex items-center gap-2 mb-6"><i data-lucide="activity" class="text-green-600"></i> Field Conditions</h3>
-                <div class="grid grid-cols-3 gap-4">
-                    <div class="p-4 bg-slate-50 rounded-xl text-center"><i data-lucide="thermometer" class="mx-auto text-blue-500 mb-2"></i><div id="dash-temp" class="text-2xl font-bold">--°C</div><div class="text-xs text-slate-400">Temp</div></div>
-                    <div class="p-4 bg-slate-50 rounded-xl text-center"><i data-lucide="droplets" class="mx-auto text-sky-500 mb-2"></i><div id="dash-hum" class="text-2xl font-bold">--%</div><div class="text-xs text-slate-400">Humidity</div></div>
-                    <div class="p-4 bg-slate-50 rounded-xl text-center"><i data-lucide="wind" class="mx-auto text-gray-500 mb-2"></i><div id="dash-wind" class="text-2xl font-bold">--</div><div class="text-xs text-slate-400">Wind</div></div>
+            <div class="bg-white p-5 md:p-6 rounded-2xl shadow-sm border border-slate-100 max-w-3xl">
+                <h3 class="font-bold text-slate-800 flex items-center gap-2 mb-6 text-sm md:text-base"><i data-lucide="activity" class="text-green-600"></i> Field Conditions</h3>
+                <div class="grid grid-cols-3 gap-3 md:gap-4">
+                    <div class="p-3 md:p-4 bg-slate-50 rounded-xl text-center">
+                        <i data-lucide="thermometer" class="mx-auto text-blue-500 mb-1 md:mb-2 w-5 h-5 md:w-6 md:h-6"></i>
+                        <div id="dash-temp" class="text-xl md:text-2xl font-bold">--°</div>
+                        <div class="text-[10px] md:text-xs text-slate-400 mt-1">Temp</div>
+                    </div>
+                    <div class="p-3 md:p-4 bg-slate-50 rounded-xl text-center">
+                        <i data-lucide="droplets" class="mx-auto text-sky-500 mb-1 md:mb-2 w-5 h-5 md:w-6 md:h-6"></i>
+                        <div id="dash-hum" class="text-xl md:text-2xl font-bold">--%</div>
+                        <div class="text-[10px] md:text-xs text-slate-400 mt-1">Humidity</div>
+                    </div>
+                    <div class="p-3 md:p-4 bg-slate-50 rounded-xl text-center">
+                        <i data-lucide="wind" class="mx-auto text-gray-500 mb-1 md:mb-2 w-5 h-5 md:w-6 md:h-6"></i>
+                        <div id="dash-wind" class="text-xl md:text-2xl font-bold">--</div>
+                        <div class="text-[10px] md:text-xs text-slate-400 mt-1">Wind</div>
+                    </div>
                 </div>
             </div>
         </main>
     </div>
 
+    <script>
+        // Mobile Menu Toggle Logic
+        window.toggleMobileMenu = function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobile-overlay');
+            
+            if (sidebar.classList.contains('-translate-x-full')) {
+                // Open menu
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                // Close menu
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        };
+
+        // Initialize UI Icons
+        lucide.createIcons();
+    </script>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-        // 👉 PASTE FIREBASE KEYS HERE
-       const firebaseConfig = {
-  apiKey: "AIzaSyDyZ5c3whwanxBvmrPtPIGpjw5t2s2LHXc",
-  authDomain: "agropath-6d8ea.firebaseapp.com",
-  projectId: "agropath-6d8ea",
-  storageBucket: "agropath-6d8ea.firebasestorage.app",
-  messagingSenderId: "234293564294",
-  appId: "1:234293564294:web:ac33138d93ca565d9dd207",
-  measurementId: "G-TRKFSVR8WD"
-};
+        // ✅ YOUR SPECIFIC FIREBASE CONFIG IS HERE
+        const firebaseConfig = {
+            apiKey: "AIzaSyDyZ5c3whwanxBvmrPtPIGpjw5t2s2LHXc",
+            authDomain: "agropath-6d8ea.firebaseapp.com",
+            projectId: "agropath-6d8ea",
+            storageBucket: "agropath-6d8ea.firebasestorage.app",
+            messagingSenderId: "234293564294",
+            appId: "1:234293564294:web:ac33138d93ca565d9dd207",
+            measurementId: "G-TRKFSVR8WD"
+        };
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
         // Security & Profile Sync
         onAuthStateChanged(auth, (user) => {
-            if (!user) window.location.href = "index.html"; // Kickout
-            else {
+            if (!user) {
+                window.location.href = "index.html"; 
+            } else {
                 document.getElementById('sidebar-name').innerText = user.displayName || "Farmer";
                 if(user.photoURL) document.getElementById('sidebar-avatar').src = user.photoURL;
                 else document.getElementById('sidebar-avatar').src = `https://ui-avatars.com/api/?name=${user.displayName || 'Farmer'}&background=16a34a&color=fff`;
             }
         });
 
+        // Global Logout Function
         window.logoutUser = () => signOut(auth);
 
-        // FIXED Location & Weather API
-        navigator.geolocation.getCurrentPosition(async (pos) => {
-            const { latitude: lat, longitude: lon } = pos.coords;
-            try {
-                // Better, free Reverse Geocoding API that doesn't block browsers
-                const geoRes = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`);
-                const geoData = await geoRes.json();
-                document.getElementById('loc-text').innerText = `${geoData.city || geoData.locality || "Farm"}, ${geoData.principalSubdivision || ""}`;
+        // Location & Weather API
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(async (pos) => {
+                const { latitude: lat, longitude: lon } = pos.coords;
+                try {
+                    const geoRes = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`);
+                    const geoData = await geoRes.json();
+                    document.getElementById('loc-text').innerText = `${geoData.city || geoData.locality || "Farm"}, ${geoData.principalSubdivision || ""}`;
 
-                // Fetch Weather
-                const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m`);
-                const weatherData = await weatherRes.json();
-                
-                document.getElementById('dash-temp').innerText = `${Math.round(weatherData.current.temperature_2m)}°C`;
-                document.getElementById('dash-hum').innerText = `${weatherData.current.relative_humidity_2m}%`;
-                document.getElementById('dash-wind').innerText = `${weatherData.current.wind_speed_10m} km/h`;
-            } catch (e) {
-                document.getElementById('loc-text').innerText = "Location Error";
-            }
-        }, () => {
-            document.getElementById('loc-text').innerText = "Location Blocked";
-        });
-
-        lucide.createIcons();
+                    const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m`);
+                    const weatherData = await weatherRes.json();
+                    
+                    document.getElementById('dash-temp').innerText = `${Math.round(weatherData.current.temperature_2m)}°C`;
+                    document.getElementById('dash-hum').innerText = `${weatherData.current.relative_humidity_2m}%`;
+                    document.getElementById('dash-wind').innerText = `${weatherData.current.wind_speed_10m} km/h`;
+                } catch (e) {
+                    document.getElementById('loc-text').innerText = "Location Error";
+                }
+            }, () => {
+                document.getElementById('loc-text').innerText = "Location Blocked";
+            });
+        }
     </script>
 </body>
 </html>
