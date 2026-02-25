@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AI Chat | AgroPath</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -12,15 +12,23 @@
         .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 12px; transition: 0.2s; color: #64748b; font-weight: 500; text-decoration: none; }
         .nav-item:hover { background: #f1f5f9; color: #0f172a; }
         .nav-item.active { background: #f0fdf4; color: #15803d; font-weight: 600; box-shadow: inset 0 0 0 1px rgba(22, 163, 74, 0.1); }
+        .custom-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body class="text-slate-900 h-screen flex overflow-hidden">
-    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col hidden md:flex">
-        <div class="p-6 border-b border-slate-100 flex items-center gap-3">
-            <div class="bg-green-600 p-2 rounded-xl"><i data-lucide="leaf" class="w-5 h-5 text-white"></i></div>
-            <div><h1 class="text-lg font-bold tracking-tight">AGROPATH</h1></div>
+
+    <div id="mobile-overlay" onclick="toggleMobileMenu()" class="fixed inset-0 bg-slate-900/60 z-40 hidden backdrop-blur-sm md:hidden transition-opacity"></div>
+
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-200 flex flex-col transform -translate-x-full transition-transform duration-300 ease-in-out md:relative md:translate-x-0 shadow-2xl md:shadow-none">
+        <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-green-600 p-2 rounded-xl"><i data-lucide="leaf" class="w-5 h-5 text-white"></i></div>
+                <div><h1 class="text-lg font-bold tracking-tight">AGROPATH</h1></div>
+            </div>
+            <button onclick="toggleMobileMenu()" class="md:hidden p-1 text-slate-400 hover:text-slate-600"><i data-lucide="x" size="20"></i></button>
         </div>
-        <nav class="p-4 space-y-1.5 flex-1 overflow-y-auto">
+
+        <nav class="p-4 space-y-1.5 flex-1 overflow-y-auto custom-scrollbar">
             <a href="dashboard.html" class="nav-item"><i data-lucide="layout-dashboard" size="18"></i> Dashboard</a>
             <a href="profile.html" class="nav-item"><i data-lucide="user" size="18"></i> Profile Settings</a>
             <a href="rewards.html" class="nav-item"><i data-lucide="award" size="18"></i> Rewards Zone</a>
@@ -32,59 +40,118 @@
             <a href="weather.html" class="nav-item"><i data-lucide="cloud-rain" size="18"></i> Weather</a>
             <a href="smartpick.html" class="nav-item"><i data-lucide="trending-up" size="18"></i> Smart Pick</a>
         </nav>
+
+        <div class="p-4 border-t border-slate-100">
+            <div class="bg-slate-50 rounded-xl p-3 flex items-center gap-3 border border-slate-100 cursor-pointer hover:bg-slate-100" onclick="window.location.href='profile.html'">
+                <img id="sidebar-avatar" src="https://ui-avatars.com/api/?name=Farmer&background=16a34a&color=fff" class="w-9 h-9 rounded-full object-cover">
+                <div class="flex-1 overflow-hidden">
+                    <p id="sidebar-name" class="text-sm font-bold text-slate-900 truncate">Loading...</p>
+                    <p class="text-[10px] text-slate-500 font-medium">View Profile</p>
+                </div>
+            </div>
+        </div>
     </aside>
 
-    <div class="flex-1 flex flex-col h-full relative w-full">
-        <header class="bg-white/80 backdrop-blur-md sticky top-0 z-30 border-b border-slate-200 px-8 py-4 flex items-center justify-between">
-            <h2 class="text-xl font-bold text-slate-800">AgroGenius Assistant</h2>
-            <button onclick="logoutUser()" class="flex items-center gap-2 px-3 py-1.5 bg-red-50 text-red-600 rounded-xl font-bold"><i data-lucide="log-out" size="16"></i> Logout</button>
+    <div class="flex-1 flex flex-col h-full relative w-full overflow-hidden">
+        <header class="bg-white/80 backdrop-blur-md sticky top-0 z-30 border-b border-slate-200 px-4 md:px-8 py-4 flex items-center justify-between shadow-sm">
+            <div class="flex items-center gap-3">
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 -ml-2 text-slate-600 hover:bg-slate-100 rounded-xl"><i data-lucide="menu" size="24"></i></button>
+                <h2 class="text-lg md:text-xl font-bold text-slate-800">AgroGenius AI</h2>
+            </div>
+            <div class="flex items-center gap-3 md:gap-4">
+                <button onclick="logoutUser()" class="hidden md:flex items-center gap-2 px-3 py-1.5 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition-colors border border-red-100 text-sm font-bold"><i data-lucide="log-out" size="16"></i> Logout</button>
+                <button onclick="logoutUser()" class="md:hidden p-2 text-red-500 hover:bg-red-50 rounded-full"><i data-lucide="log-out" size="20"></i></button>
+            </div>
         </header>
 
-        <main class="flex-1 overflow-y-auto p-8 flex flex-col">
-            <div id="chat-messages" class="flex-1 overflow-y-auto bg-white rounded-t-2xl border border-slate-200 p-6 space-y-6">
+        <main class="flex-1 overflow-hidden p-4 md:p-8 flex flex-col">
+            <div id="chat-messages" class="flex-1 overflow-y-auto bg-white rounded-t-2xl border border-slate-200 p-4 md:p-6 space-y-4">
                 <div class="flex justify-start">
-                    <div class="max-w-[70%] rounded-2xl p-4 bg-slate-100 text-slate-700 rounded-tl-none">
-                        Hello! I'm AgroGenius. Ask me about farming, weather, or crops!
+                    <div class="max-w-[85%] md:max-w-[70%] rounded-2xl p-4 bg-slate-100 text-slate-700 rounded-tl-none text-sm md:text-base">
+                        Hello! I'm AgroGenius. Ask me about farming, weather, or crops! Try clicking one of the suggestions below.
                     </div>
                 </div>
             </div>
-            <div class="p-4 bg-white border border-t-0 border-slate-200 rounded-b-2xl flex gap-2">
-                <input id="chat-input" type="text" placeholder="Type a farming question..." class="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none">
-                <button onclick="sendMessage()" class="p-3 bg-green-600 text-white rounded-xl"><i data-lucide="send" size="20"></i></button>
+            <div class="p-3 md:p-4 bg-white border border-t-0 border-slate-200 rounded-b-2xl">
+                <div class="flex gap-2 mb-3 overflow-x-auto custom-scrollbar pb-1">
+                    <button onclick="setChatInput('🌧️ Will it rain today?')" class="whitespace-nowrap px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-full text-xs font-medium text-slate-600 border border-slate-200">🌧️ Will it rain?</button>
+                    <button onclick="setChatInput('🍅 Tomato growing tips')" class="whitespace-nowrap px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-full text-xs font-medium text-slate-600 border border-slate-200">🍅 Tomato tips</button>
+                </div>
+                <div class="flex gap-2">
+                    <input id="chat-input" type="text" placeholder="Type a farming question..." class="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none text-sm md:text-base">
+                    <button onclick="sendMessage()" class="p-3 bg-green-600 hover:bg-green-700 text-white rounded-xl shadow-lg"><i data-lucide="send" size="20"></i></button>
+                </div>
             </div>
         </main>
     </div>
     
     <script>
-        function sendMessage() {
+        window.toggleMobileMenu = function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobile-overlay');
+            if (sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        };
+
+        window.setChatInput = function(text) {
+            document.getElementById('chat-input').value = text;
+            window.sendMessage();
+        }
+
+        window.sendMessage = function() {
             const input = document.getElementById('chat-input');
             const msg = input.value.trim();
             if(!msg) return;
             const box = document.getElementById('chat-messages');
-            box.innerHTML += `<div class="flex justify-end mt-4"><div class="max-w-[70%] p-4 bg-green-600 text-white rounded-2xl rounded-tr-none">${msg}</div></div>`;
+            box.innerHTML += `<div class="flex justify-end mt-4"><div class="max-w-[85%] md:max-w-[70%] p-4 bg-green-600 text-white rounded-2xl rounded-tr-none text-sm md:text-base">${msg}</div></div>`;
             input.value = '';
+            box.scrollTop = box.scrollHeight;
+            
             setTimeout(() => {
-                box.innerHTML += `<div class="flex justify-start mt-4"><div class="max-w-[70%] p-4 bg-slate-100 text-slate-700 rounded-2xl rounded-tl-none">I am an AI. I need a backend server to process that!</div></div>`;
-            }, 1000);
+                let reply = "I am an AI. I need a backend server connected to process that!";
+                if(msg.toLowerCase().includes('rain')) reply = "Current forecasts show a high chance of rain today. Pause scheduled irrigation.";
+                if(msg.toLowerCase().includes('tomato')) reply = "Tomatoes need consistent watering to prevent blossom end rot. Support them with stakes.";
+                
+                box.innerHTML += `<div class="flex justify-start mt-4"><div class="max-w-[85%] md:max-w-[70%] p-4 bg-slate-100 text-slate-700 rounded-2xl rounded-tl-none text-sm md:text-base">${reply}</div></div>`;
+                box.scrollTop = box.scrollHeight;
+            }, 800);
         }
+
+        document.getElementById('chat-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') window.sendMessage();
+        });
+
+        lucide.createIcons();
     </script>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-       const firebaseConfig = {
-  apiKey: "AIzaSyDyZ5c3whwanxBvmrPtPIGpjw5t2s2LHXc",
-  authDomain: "agropath-6d8ea.firebaseapp.com",
-  projectId: "agropath-6d8ea",
-  storageBucket: "agropath-6d8ea.firebasestorage.app",
-  messagingSenderId: "234293564294",
-  appId: "1:234293564294:web:ac33138d93ca565d9dd207",
-  measurementId: "G-TRKFSVR8WD"
-};
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyDyZ5c3whwanxBvmrPtPIGpjw5t2s2LHXc",
+            authDomain: "agropath-6d8ea.firebaseapp.com",
+            projectId: "agropath-6d8ea",
+            storageBucket: "agropath-6d8ea.firebasestorage.app",
+            messagingSenderId: "234293564294",
+            appId: "1:234293564294:web:ac33138d93ca565d9dd207",
+            measurementId: "G-TRKFSVR8WD"
+        };
         const app = initializeApp(firebaseConfig); const auth = getAuth(app);
-        onAuthStateChanged(auth, (user) => { if (!user) window.location.href = "index.html"; });
+
+        onAuthStateChanged(auth, (user) => {
+            if (!user) window.location.href = "index.html"; 
+            else {
+                document.getElementById('sidebar-name').innerText = user.displayName || "Farmer";
+                if(user.photoURL) document.getElementById('sidebar-avatar').src = user.photoURL;
+            }
+        });
         window.logoutUser = () => signOut(auth);
-        lucide.createIcons();
     </script>
 </body>
 </html>
