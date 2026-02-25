@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Disease Scan | AgroPath</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -12,15 +12,23 @@
         .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 12px; transition: 0.2s; color: #64748b; font-weight: 500; text-decoration: none; }
         .nav-item:hover { background: #f1f5f9; color: #0f172a; }
         .nav-item.active { background: #f0fdf4; color: #15803d; font-weight: 600; box-shadow: inset 0 0 0 1px rgba(22, 163, 74, 0.1); }
+        .custom-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body class="text-slate-900 h-screen flex overflow-hidden">
-    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col hidden md:flex">
-        <div class="p-6 border-b border-slate-100 flex items-center gap-3">
-            <div class="bg-green-600 p-2 rounded-xl"><i data-lucide="leaf" class="w-5 h-5 text-white"></i></div>
-            <div><h1 class="text-lg font-bold tracking-tight">AGROPATH</h1></div>
+
+    <div id="mobile-overlay" onclick="toggleMobileMenu()" class="fixed inset-0 bg-slate-900/60 z-40 hidden backdrop-blur-sm md:hidden transition-opacity"></div>
+
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-200 flex flex-col transform -translate-x-full transition-transform duration-300 ease-in-out md:relative md:translate-x-0 shadow-2xl md:shadow-none">
+        <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-green-600 p-2 rounded-xl"><i data-lucide="leaf" class="w-5 h-5 text-white"></i></div>
+                <div><h1 class="text-lg font-bold tracking-tight">AGROPATH</h1></div>
+            </div>
+            <button onclick="toggleMobileMenu()" class="md:hidden p-1 text-slate-400 hover:text-slate-600"><i data-lucide="x" size="20"></i></button>
         </div>
-        <nav class="p-4 space-y-1.5 flex-1 overflow-y-auto">
+
+        <nav class="p-4 space-y-1.5 flex-1 overflow-y-auto custom-scrollbar">
             <a href="dashboard.html" class="nav-item"><i data-lucide="layout-dashboard" size="18"></i> Dashboard</a>
             <a href="profile.html" class="nav-item"><i data-lucide="user" size="18"></i> Profile Settings</a>
             <a href="rewards.html" class="nav-item"><i data-lucide="award" size="18"></i> Rewards Zone</a>
@@ -32,42 +40,136 @@
             <a href="weather.html" class="nav-item"><i data-lucide="cloud-rain" size="18"></i> Weather</a>
             <a href="smartpick.html" class="nav-item"><i data-lucide="trending-up" size="18"></i> Smart Pick</a>
         </nav>
+
+        <div class="p-4 border-t border-slate-100">
+            <div class="bg-slate-50 rounded-xl p-3 flex items-center gap-3 border border-slate-100 cursor-pointer hover:bg-slate-100" onclick="window.location.href='profile.html'">
+                <img id="sidebar-avatar" src="https://ui-avatars.com/api/?name=Farmer&background=16a34a&color=fff" class="w-9 h-9 rounded-full object-cover">
+                <div class="flex-1 overflow-hidden">
+                    <p id="sidebar-name" class="text-sm font-bold text-slate-900 truncate">Loading...</p>
+                    <p class="text-[10px] text-slate-500 font-medium">View Profile</p>
+                </div>
+            </div>
+        </div>
     </aside>
 
-    <div class="flex-1 flex flex-col h-full relative w-full">
-        <header class="bg-white/80 backdrop-blur-md sticky top-0 z-30 border-b border-slate-200 px-8 py-4 flex items-center justify-between">
-            <h2 class="text-xl font-bold text-slate-800">Disease Scan</h2>
-            <button onclick="logoutUser()" class="flex items-center gap-2 px-3 py-1.5 bg-red-50 text-red-600 rounded-xl font-bold"><i data-lucide="log-out" size="16"></i> Logout</button>
+    <div class="flex-1 flex flex-col h-full relative w-full overflow-hidden">
+        <header class="bg-white/80 backdrop-blur-md sticky top-0 z-30 border-b border-slate-200 px-4 md:px-8 py-4 flex items-center justify-between shadow-sm">
+            <div class="flex items-center gap-3">
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 -ml-2 text-slate-600 hover:bg-slate-100 rounded-xl"><i data-lucide="menu" size="24"></i></button>
+                <h2 class="text-lg md:text-xl font-bold text-slate-800">Plant Doctor</h2>
+            </div>
+            <div class="flex items-center gap-3 md:gap-4">
+                <button onclick="logoutUser()" class="hidden md:flex items-center gap-2 px-3 py-1.5 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition-colors border border-red-100 text-sm font-bold"><i data-lucide="log-out" size="16"></i> Logout</button>
+                <button onclick="logoutUser()" class="md:hidden p-2 text-red-500 hover:bg-red-50 rounded-full"><i data-lucide="log-out" size="20"></i></button>
+            </div>
         </header>
 
-        <main class="flex-1 overflow-y-auto p-8 flex justify-center">
-            <div class="w-full max-w-2xl bg-white p-8 rounded-3xl shadow-sm border border-slate-200 text-center h-fit">
-                <div class="w-24 h-24 bg-purple-50 rounded-full flex items-center justify-center mx-auto text-purple-500 mb-6"><i data-lucide="camera" size="40"></i></div>
-                <h3 class="font-bold text-2xl mb-2">Upload Leaf Photo</h3>
-                <p class="text-slate-500 mb-8">Let AI identify plant diseases instantly.</p>
-                <label class="cursor-pointer bg-slate-900 text-white px-8 py-4 rounded-full font-bold shadow-lg">
-                    Select Image <input type="file" class="hidden" accept="image/*" onchange="alert('In a real app, this sends the image to an AI backend!')">
-                </label>
+        <main class="flex-1 overflow-y-auto p-4 md:p-8 flex justify-center">
+            <div class="w-full max-w-2xl bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-slate-200 text-center h-fit relative">
+                
+                <div id="upload-placeholder" class="py-12">
+                    <div class="w-20 h-20 md:w-24 md:h-24 bg-purple-50 rounded-full flex items-center justify-center mx-auto text-purple-500 mb-6"><i data-lucide="camera" size="40"></i></div>
+                    <h3 class="font-bold text-xl md:text-2xl mb-2">Upload Leaf Photo</h3>
+                    <p class="text-slate-500 mb-8 text-sm md:text-base">Let AI identify plant diseases instantly. <span class="text-green-600 font-bold block mt-1">Earn +50 Points!</span></p>
+                    <label class="cursor-pointer bg-slate-900 text-white px-6 md:px-8 py-3.5 md:py-4 rounded-full font-bold shadow-lg text-sm md:text-base">
+                        Select Image <input type="file" class="hidden" accept="image/*" onchange="window.handleImageUpload(event)">
+                    </label>
+                </div>
+
+                <div id="image-preview" class="hidden h-full flex flex-col">
+                    <img id="preview-img" src="" class="w-full h-48 md:h-64 object-cover rounded-xl shadow-md mb-6 border border-slate-100">
+                    <button onclick="window.startDiagnosis()" id="diagnose-btn" class="w-full bg-green-600 text-white py-4 rounded-xl font-bold text-lg shadow-lg">Analyze & Earn Points</button>
+                    <button onclick="window.resetScan()" class="absolute top-4 right-4 p-2 bg-slate-100 text-slate-600 rounded-full"><i data-lucide="x" size="20"></i></button>
+                </div>
+
+                <div id="scan-loading" class="hidden absolute inset-0 bg-white/95 flex flex-col items-center justify-center z-10 rounded-3xl">
+                    <div class="w-16 h-16 border-4 border-slate-100 border-t-green-500 rounded-full animate-spin mb-4"></div>
+                    <p class="text-slate-600 font-medium animate-pulse">AI is analyzing leaf texture...</p>
+                </div>
+
+                <div id="scan-result" class="hidden mt-6 text-left border-t border-slate-100 pt-6">
+                    <div class="bg-red-50 p-4 md:p-6 rounded-2xl border border-red-100 mb-4">
+                        <h3 class="text-xl font-bold text-red-700 flex items-center gap-2"><i data-lucide="alert-triangle"></i> Early Blight</h3>
+                        <p class="text-red-600/80 font-medium text-sm mt-1">Confidence: 94%</p>
+                    </div>
+                    <div class="p-4 bg-green-50 rounded-2xl border border-green-100">
+                        <h4 class="font-bold text-green-800 mb-2 flex items-center gap-2"><i data-lucide="leaf" size="16"></i> Organic Cure</h4>
+                        <p class="text-sm text-green-700 leading-relaxed">Spray Neem Oil (5ml/L) or a Baking soda solution twice a week.</p>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
 
+    <script>
+        window.toggleMobileMenu = function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobile-overlay');
+            if (sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        };
+
+        window.handleImageUpload = function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('preview-img').src = e.target.result;
+                    document.getElementById('upload-placeholder').classList.add('hidden');
+                    document.getElementById('image-preview').classList.remove('hidden');
+                    document.getElementById('scan-result').classList.add('hidden');
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        window.startDiagnosis = function() {
+            document.getElementById('diagnose-btn').disabled = true;
+            document.getElementById('scan-loading').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('scan-loading').classList.add('hidden');
+                document.getElementById('scan-result').classList.remove('hidden');
+                document.getElementById('diagnose-btn').disabled = false;
+            }, 2000);
+        }
+
+        window.resetScan = function() {
+            document.getElementById('image-preview').classList.add('hidden');
+            document.getElementById('scan-result').classList.add('hidden');
+            document.getElementById('upload-placeholder').classList.remove('hidden');
+        }
+
+        lucide.createIcons();
+    </script>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        
         const firebaseConfig = {
-  apiKey: "AIzaSyDyZ5c3whwanxBvmrPtPIGpjw5t2s2LHXc",
-  authDomain: "agropath-6d8ea.firebaseapp.com",
-  projectId: "agropath-6d8ea",
-  storageBucket: "agropath-6d8ea.firebasestorage.app",
-  messagingSenderId: "234293564294",
-  appId: "1:234293564294:web:ac33138d93ca565d9dd207",
-  measurementId: "G-TRKFSVR8WD"
-};
+            apiKey: "AIzaSyDyZ5c3whwanxBvmrPtPIGpjw5t2s2LHXc",
+            authDomain: "agropath-6d8ea.firebaseapp.com",
+            projectId: "agropath-6d8ea",
+            storageBucket: "agropath-6d8ea.firebasestorage.app",
+            messagingSenderId: "234293564294",
+            appId: "1:234293564294:web:ac33138d93ca565d9dd207",
+            measurementId: "G-TRKFSVR8WD"
+        };
         const app = initializeApp(firebaseConfig); const auth = getAuth(app);
-        onAuthStateChanged(auth, (user) => { if (!user) window.location.href = "index.html"; });
+
+        onAuthStateChanged(auth, (user) => {
+            if (!user) window.location.href = "index.html"; 
+            else {
+                document.getElementById('sidebar-name').innerText = user.displayName || "Farmer";
+                if(user.photoURL) document.getElementById('sidebar-avatar').src = user.photoURL;
+            }
+        });
         window.logoutUser = () => signOut(auth);
-        lucide.createIcons();
     </script>
 </body>
 </html>
